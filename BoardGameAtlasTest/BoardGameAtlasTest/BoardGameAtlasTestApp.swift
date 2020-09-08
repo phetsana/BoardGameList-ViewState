@@ -9,6 +9,11 @@ import SwiftUI
 
 @main
 struct BoardGameAtlasTestApp: App {
+    
+    init() {
+        URLCache.shared.removeAllCachedResponses()
+    }
+    
     var body: some Scene {
         WindowGroup {
             ContentView()
