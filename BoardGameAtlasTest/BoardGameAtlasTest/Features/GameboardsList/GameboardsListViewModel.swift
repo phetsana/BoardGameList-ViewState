@@ -52,7 +52,7 @@ extension GameboardsListViewModel {
         case onFailedToLoadMovies(Error)
     }
 
-    struct GameItem: Identifiable {
+    struct GameItem: Identifiable, Equatable {
         let id: String
         let name: String?
         let imageURL: URL?
@@ -61,6 +61,23 @@ extension GameboardsListViewModel {
             id = game.id
             name = game.name
             imageURL = game.imageUrl
+        }
+    }
+}
+
+extension GameboardsListViewModel.State: Equatable {
+    static func == (lhs: GameboardsListViewModel.State, rhs: GameboardsListViewModel.State) -> Bool {
+        switch (lhs, rhs) {
+        case (.idle, .idle):
+            return true
+        case (.loading, .loading):
+            return true
+        case (.loaded(let lhsGames), .loaded(let rhsGames)):
+                return lhsGames == rhsGames
+        case (.error, .error):
+            return true
+        default:
+            return false
         }
     }
 }
