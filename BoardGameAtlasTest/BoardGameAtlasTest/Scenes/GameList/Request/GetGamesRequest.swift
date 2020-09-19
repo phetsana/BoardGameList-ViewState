@@ -11,12 +11,12 @@ enum OrderBy: String, Codable {
     case popularity
 }
 
-struct GetGamesRequest: APIRequest {
+struct GetGamesRequest: NetworkingRequest {
 
     typealias Response = GamesDTO
          
     var resourceName: String {
-        return "search"
+        return "/api/search"
     }
     
     private let orderBy: OrderBy

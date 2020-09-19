@@ -1,5 +1,5 @@
 //
-//  APIError.swift
+//  NetworkingError.swift
 //  BoardGameAtlasTest
 //
 //  Created by Phetsana PHOMMARINH on 07/09/2020.
@@ -8,9 +8,9 @@
 import Foundation
 
 /// API errors
-public enum APIError: Error {
+public enum NetworkingError: Error {
     case encoding
     case decoding
     case endpoint
-    case server(message: String)
+    case other(Error)
 }

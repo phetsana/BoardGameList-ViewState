@@ -1,5 +1,5 @@
 //
-//  APIRequest.swift
+//  NetworkingRequest.swift
 //  BoardGameAtlasTest
 //
 //  Created by Phetsana PHOMMARINH on 07/09/2020.
@@ -8,7 +8,7 @@
 import Foundation
 
 /// API protocol request
-public protocol APIRequest: Encodable {
+public protocol NetworkingRequest: Encodable {
     /// Response (will be wrapped with a DataContainer)
     associatedtype Response: Decodable
     

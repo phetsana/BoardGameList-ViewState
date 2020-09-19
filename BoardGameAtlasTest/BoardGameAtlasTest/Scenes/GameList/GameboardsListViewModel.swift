@@ -8,28 +8,34 @@
 import Foundation
 import Combine
 
-final class GameboardsListViewModel: ObservableObject {
+class GameboardsListViewModel: ObservableObject {
     @Published private(set) var state = State.idle
     
-    private var bag = Set<AnyCancellable>()
+    private var subscriptions = Set<AnyCancellable>()
         
     private let input = PassthroughSubject<Event, Never>()
     
-    init() {
+    private let apiService: NetworkingService
+    init(apiService: NetworkingService = BoardGameAtlasNetworkingServiceImpl()) {
+        self.apiService = apiService
+
         Publishers.system(initial: state,
                           reduce: Self.reduce,
                           scheduler: RunLoop.main,
                           feedbacks: [
-                            Self.whenLoading(),
+                            Self.whenLoading(apiService: self.apiService),
                             Self.userInput(input: input.eraseToAnyPublisher())
                           ]
         )
-        .assign(to: \.state, on: self)
-        .store(in: &bag)
+        .sink(receiveValue: { [weak self] (state) in
+            self?.state = state
+        })
+        .store(in: &subscriptions)
     }
     
     deinit {
-        bag.removeAll()
+        subscriptions.forEach { $0.cancel() }
+        subscriptions.removeAll()
     }
     
     func send(event: Event) {
@@ -39,20 +45,20 @@ final class GameboardsListViewModel: ObservableObject {
 
 // MARK: - Inner Types
 extension GameboardsListViewModel {
-    enum State {
+    enum State: AutoEquatable {
         case idle
         case loading
         case loaded([GameItem])
         case error(Error)
     }
 
-    enum Event {
+    enum Event: AutoEquatable {
         case onAppear
-        case onMoviesLoaded([GameItem])
-        case onFailedToLoadMovies(Error)
+        case onGamesLoaded([GameItem])
+        case onFailedToLoadGames(Error)
     }
 
-    struct GameItem: Identifiable {
+    struct GameItem: Identifiable, Equatable {
         let id: String
         let name: String?
         let imageURL: URL?
@@ -78,9 +84,9 @@ extension GameboardsListViewModel {
             }
         case .loading:
             switch event {
-            case .onFailedToLoadMovies(let error):
+            case .onFailedToLoadGames(let error):
                 return .error(error)
-            case .onMoviesLoaded(let movies):
+            case .onGamesLoaded(let movies):
                 return .loaded(movies)
             default:
                 return state
@@ -92,17 +98,16 @@ extension GameboardsListViewModel {
         }
     }
     
-    static func whenLoading() -> Feedback<State, Event> {
+    static func whenLoading(apiService: NetworkingService) -> Feedback<State, Event> {
         Feedback { (state: State) -> AnyPublisher<Event, Never> in
             guard case .loading = state else { return Empty().eraseToAnyPublisher() }
-            let apiService = APIClientImpl()
             let request = GetGamesRequest()
             return apiService
-                    .send(request)
-                    .map { $0.games.map(GameItem.init) }
-                    .map(Event.onMoviesLoaded)
-                    .catch { Just(Event.onFailedToLoadMovies($0)) }
-                    .eraseToAnyPublisher()
+                .send(request)
+                .map { $0.games.map(GameItem.init) }
+                .map(Event.onGamesLoaded)
+                .catch { Just(Event.onFailedToLoadGames($0)) }                    
+                .eraseToAnyPublisher()
         }
     }
     
