@@ -1,63 +1,56 @@
 //
-//  APIClient.swift
+//  NetworkingServiceImpl.swift
 //  BoardGameAtlasTest
 //
-//  Created by Phetsana PHOMMARINH on 07/09/2020.
+//  Created by Phetsana PHOMMARINH on 19/09/2020.
 //
 
 import Foundation
 import Combine
 
-protocol APIClient {
-    func send<T: APIRequest>(_ request: T) -> AnyPublisher<T.Response, Error>
-}
-
-class APIClientImpl: APIClient {
+class NetworkingServiceImpl: NetworkingService {
     private let baseURL: URL
 
-    init() {
-        self.baseURL = URL(string: "https://api.boardgameatlas.com/")!
+    init(baseURL: URL) {
+        self.baseURL = baseURL
     }
     
-    func send<T: APIRequest>(_ request: T) -> AnyPublisher<T.Response, Error> {
+    func send<T: NetworkingRequest>(_ request: T) -> AnyPublisher<T.Response, NetworkingError> {
         do {
             let endpoint = try self.endpoint(for: request)
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             return URLSession.shared
-                .dataTaskPublisher(for: endpoint)                
+                .dataTaskPublisher(for: endpoint)
                 .map { $0.data }
                 .decode(type: T.Response.self, decoder: decoder)
+                .mapError { NetworkingError.other($0) }
                 .eraseToAnyPublisher()
         } catch {
-            return Fail(error: error).eraseToAnyPublisher()
+            return Fail(error: NetworkingError.endpoint).eraseToAnyPublisher()
         }
         
     }
 
-    private func endpoint<T: APIRequest>(for request: T) throws -> URL  {
+    func endpoint<T: NetworkingRequest>(for request: T) throws -> URL  {
         guard var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true) else {
-            throw APIError.endpoint
+            throw NetworkingError.endpoint
         }
-        urlComponents.path = "/api/" + request.resourceName
+        urlComponents.path = request.resourceName
 
-        let commonQueryItems: [URLQueryItem] = [
-            URLQueryItem(name: "client_id", value: "4ESSA0yrVW")
-        ]
-        
         // Custom query items needed for this specific request
         let customQueryItems: [URLQueryItem]
         
         do {
             customQueryItems = try URLQueryItemEncoder.encode(request)
         } catch {
-            throw APIError.endpoint
+            throw NetworkingError.endpoint
         }
         
-        urlComponents.queryItems = commonQueryItems + customQueryItems
+        urlComponents.queryItems = customQueryItems
         
         guard let url = urlComponents.url else {
-            throw APIError.endpoint
+            throw NetworkingError.endpoint
         }
     
         // Construct the final URL with all the previous data
@@ -94,7 +87,7 @@ enum HTTPParameter: CustomStringConvertible, Decodable {
         } else if let double = try? container.decode(Double.self) {
             self = .double(double)
         } else {
-            throw APIError.decoding
+            throw NetworkingError.decoding
         }
     }
     

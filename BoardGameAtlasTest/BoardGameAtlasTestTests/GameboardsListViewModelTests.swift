@@ -18,7 +18,7 @@ class GameboardsListViewModelTests: XCTestCase {
     static var deinitCalled = false
     
     override func setUp() {
-        let apiClientMock = APIClientMock(file: "api_search")
+        let apiClientMock = NetworkingServiceMock(file: "api_search")
         sut = GameboardsListViewModel(apiService: apiClientMock)
         GameboardsListViewModelTests.deinitCalled = false
     }
@@ -122,7 +122,7 @@ class GameboardsListViewModelTests: XCTestCase {
     }
     
     func test_whenLoading_gamesLoaded() {
-        let apiClientMock = APIClientMock(file: "api_search")
+        let apiClientMock = NetworkingServiceMock(file: "api_search")
         let feedback = GameboardsListViewModel.whenLoading(apiService: apiClientMock)
         let publisher = CurrentValueSubject<GameboardsListViewModel.State, Never>(.idle)
         let loadingExpectation = expectation(description: "loading")
@@ -147,7 +147,7 @@ class GameboardsListViewModelTests: XCTestCase {
         enum APIError: Error {
             case loading
         }
-        let apiClientMock = APIClientMock(file: "api_search", error: APIError.loading)
+        let apiClientMock = NetworkingServiceMock(file: "api_search", error: APIError.loading)
         let feedback = GameboardsListViewModel.whenLoading(apiService: apiClientMock)
         let publisher = CurrentValueSubject<GameboardsListViewModel.State, Never>(.idle)
         let loadingExpectation = expectation(description: "loading")
@@ -169,7 +169,7 @@ class GameboardsListViewModelTests: XCTestCase {
     }
     
     func test_deinit() {
-        let apiClientMock = APIClientMock(file: "api_search")
+        let apiClientMock = NetworkingServiceMock(file: "api_search")
         var sut: GameboardsListViewModelMock? = GameboardsListViewModelMock(apiService: apiClientMock)
         XCTAssertNotNil(sut)
         sut = nil

@@ -8,17 +8,19 @@
 
 /* Begin PBXBuildFile section */
 		9B4AEF5A250EA2AF005C1E41 /* AutoEquatable.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4AEF59250EA2AF005C1E41 /* AutoEquatable.generated.swift */; };
-		9B4AEF5C250ED764005C1E41 /* APIClientMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4AEF5B250ED764005C1E41 /* APIClientMock.swift */; };
+		9B4AEF5C250ED764005C1E41 /* NetworkingServiceMock.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4AEF5B250ED764005C1E41 /* NetworkingServiceMock.swift */; };
 		9B4AEF5E250EDC9D005C1E41 /* api_search.json in Resources */ = {isa = PBXBuildFile; fileRef = 9B4AEF5D250EDC9D005C1E41 /* api_search.json */; };
 		9B6F3FD9250E960C00CADFF4 /* AutoEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F3FD8250E960C00CADFF4 /* AutoEquatable.swift */; };
+		9BB9D5F025160B4200190801 /* NetworkingServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB9D5EF25160B4200190801 /* NetworkingServiceImpl.swift */; };
+		9BB9D5F825160D1400190801 /* BoardGameAtlasNetworkingServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB9D5F725160D1400190801 /* BoardGameAtlasNetworkingServiceImpl.swift */; };
 		9BC22E812506CE8200C0F9D2 /* BoardGameAtlasTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC22E802506CE8200C0F9D2 /* BoardGameAtlasTestApp.swift */; };
 		9BC22E832506CE8200C0F9D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC22E822506CE8200C0F9D2 /* ContentView.swift */; };
 		9BC22E852506CE8400C0F9D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BC22E842506CE8400C0F9D2 /* Assets.xcassets */; };
 		9BC22E882506CE8400C0F9D2 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BC22E872506CE8400C0F9D2 /* Preview Assets.xcassets */; };
 		9BC22EAD2506DD6300C0F9D2 /* GameDTO.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC22EAC2506DD6300C0F9D2 /* GameDTO.swift */; };
-		9BC22EB02506DE3D00C0F9D2 /* APIRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC22EAF2506DE3D00C0F9D2 /* APIRequest.swift */; };
-		9BC22EB22506DE5200C0F9D2 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC22EB12506DE5200C0F9D2 /* APIError.swift */; };
-		9BC22EB42506DE9600C0F9D2 /* APIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC22EB32506DE9600C0F9D2 /* APIClient.swift */; };
+		9BC22EB02506DE3D00C0F9D2 /* NetworkingRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC22EAF2506DE3D00C0F9D2 /* NetworkingRequest.swift */; };
+		9BC22EB22506DE5200C0F9D2 /* NetworkingError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC22EB12506DE5200C0F9D2 /* NetworkingError.swift */; };
+		9BC22EB42506DE9600C0F9D2 /* NetworkingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC22EB32506DE9600C0F9D2 /* NetworkingService.swift */; };
 		9BC22EB92506E2A600C0F9D2 /* GetGamesRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC22EB82506E2A600C0F9D2 /* GetGamesRequest.swift */; };
 		9BC611DA25082463006EAE20 /* Feedback.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC611D925082463006EAE20 /* Feedback.swift */; };
 		9BC611DC25082477006EAE20 /* System.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC611DB25082477006EAE20 /* System.swift */; };
@@ -51,9 +53,11 @@
 		443368BFE8E65DBDDDE2A132 /* Pods-BoardGameAtlasTest.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoardGameAtlasTest.debug.xcconfig"; path = "Target Support Files/Pods-BoardGameAtlasTest/Pods-BoardGameAtlasTest.debug.xcconfig"; sourceTree = "<group>"; };
 		9692F0D6AF5C747E93F57CB0 /* Pods-BoardGameAtlasTest.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoardGameAtlasTest.release.xcconfig"; path = "Target Support Files/Pods-BoardGameAtlasTest/Pods-BoardGameAtlasTest.release.xcconfig"; sourceTree = "<group>"; };
 		9B4AEF59250EA2AF005C1E41 /* AutoEquatable.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AutoEquatable.generated.swift; sourceTree = "<group>"; };
-		9B4AEF5B250ED764005C1E41 /* APIClientMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClientMock.swift; sourceTree = "<group>"; };
+		9B4AEF5B250ED764005C1E41 /* NetworkingServiceMock.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingServiceMock.swift; sourceTree = "<group>"; };
 		9B4AEF5D250EDC9D005C1E41 /* api_search.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = api_search.json; sourceTree = "<group>"; };
 		9B6F3FD8250E960C00CADFF4 /* AutoEquatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoEquatable.swift; sourceTree = "<group>"; };
+		9BB9D5EF25160B4200190801 /* NetworkingServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingServiceImpl.swift; sourceTree = "<group>"; };
+		9BB9D5F725160D1400190801 /* BoardGameAtlasNetworkingServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardGameAtlasNetworkingServiceImpl.swift; sourceTree = "<group>"; };
 		9BC22E7D2506CE8200C0F9D2 /* BoardGameAtlasTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoardGameAtlasTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BC22E802506CE8200C0F9D2 /* BoardGameAtlasTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardGameAtlasTestApp.swift; sourceTree = "<group>"; };
 		9BC22E822506CE8200C0F9D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -63,9 +67,9 @@
 		9BC22E8E2506CE8400C0F9D2 /* BoardGameAtlasTestTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = BoardGameAtlasTestTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BC22E942506CE8400C0F9D2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9BC22EAC2506DD6300C0F9D2 /* GameDTO.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDTO.swift; sourceTree = "<group>"; };
-		9BC22EAF2506DE3D00C0F9D2 /* APIRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIRequest.swift; sourceTree = "<group>"; };
-		9BC22EB12506DE5200C0F9D2 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
-		9BC22EB32506DE9600C0F9D2 /* APIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIClient.swift; sourceTree = "<group>"; };
+		9BC22EAF2506DE3D00C0F9D2 /* NetworkingRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingRequest.swift; sourceTree = "<group>"; };
+		9BC22EB12506DE5200C0F9D2 /* NetworkingError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingError.swift; sourceTree = "<group>"; };
+		9BC22EB32506DE9600C0F9D2 /* NetworkingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingService.swift; sourceTree = "<group>"; };
 		9BC22EB82506E2A600C0F9D2 /* GetGamesRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GetGamesRequest.swift; sourceTree = "<group>"; };
 		9BC611D925082463006EAE20 /* Feedback.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Feedback.swift; sourceTree = "<group>"; };
 		9BC611DB25082477006EAE20 /* System.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = System.swift; sourceTree = "<group>"; };
@@ -197,9 +201,8 @@
 		9B8DEDA92514D33700783371 /* Networking */ = {
 			isa = PBXGroup;
 			children = (
-				9BC22EAF2506DE3D00C0F9D2 /* APIRequest.swift */,
-				9BC22EB12506DE5200C0F9D2 /* APIError.swift */,
-				9BC22EB32506DE9600C0F9D2 /* APIClient.swift */,
+				9BB9D5FB2516104F00190801 /* Core */,
+				9BB9D5F725160D1400190801 /* BoardGameAtlasNetworkingServiceImpl.swift */,
 			);
 			path = Networking;
 			sourceTree = "<group>";
@@ -232,9 +235,20 @@
 		9B8DEDB12514D51800783371 /* Mocks */ = {
 			isa = PBXGroup;
 			children = (
-				9B4AEF5B250ED764005C1E41 /* APIClientMock.swift */,
+				9B4AEF5B250ED764005C1E41 /* NetworkingServiceMock.swift */,
 			);
 			path = Mocks;
+			sourceTree = "<group>";
+		};
+		9BB9D5FB2516104F00190801 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				9BC22EAF2506DE3D00C0F9D2 /* NetworkingRequest.swift */,
+				9BC22EB12506DE5200C0F9D2 /* NetworkingError.swift */,
+				9BC22EB32506DE9600C0F9D2 /* NetworkingService.swift */,
+				9BB9D5EF25160B4200190801 /* NetworkingServiceImpl.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 		9BC22E742506CE8200C0F9D2 = {
@@ -491,18 +505,20 @@
 				9BC611F025082658006EAE20 /* AsyncImage.swift in Sources */,
 				9BC611DA25082463006EAE20 /* Feedback.swift in Sources */,
 				9BC22EAD2506DD6300C0F9D2 /* GameDTO.swift in Sources */,
-				9BC22EB02506DE3D00C0F9D2 /* APIRequest.swift in Sources */,
+				9BC22EB02506DE3D00C0F9D2 /* NetworkingRequest.swift in Sources */,
 				9BC611EA250825BE006EAE20 /* Agent.swift in Sources */,
 				9BC611ED25082634006EAE20 /* Spinner.swift in Sources */,
 				9BC611F425082687006EAE20 /* ImageLoader.swift in Sources */,
 				9BC22EB92506E2A600C0F9D2 /* GetGamesRequest.swift in Sources */,
+				9BB9D5F825160D1400190801 /* BoardGameAtlasNetworkingServiceImpl.swift in Sources */,
 				9B4AEF5A250EA2AF005C1E41 /* AutoEquatable.generated.swift in Sources */,
-				9BC22EB22506DE5200C0F9D2 /* APIError.swift in Sources */,
+				9BC22EB22506DE5200C0F9D2 /* NetworkingError.swift in Sources */,
 				9BC611E22508252A006EAE20 /* GameboardsListView.swift in Sources */,
 				9BC611F225082675006EAE20 /* ImageCache.swift in Sources */,
 				9BC22E812506CE8200C0F9D2 /* BoardGameAtlasTestApp.swift in Sources */,
-				9BC22EB42506DE9600C0F9D2 /* APIClient.swift in Sources */,
+				9BC22EB42506DE9600C0F9D2 /* NetworkingService.swift in Sources */,
 				9B6F3FD9250E960C00CADFF4 /* AutoEquatable.swift in Sources */,
+				9BB9D5F025160B4200190801 /* NetworkingServiceImpl.swift in Sources */,
 				9BC611E425082578006EAE20 /* GameboardsListViewModel.swift in Sources */,
 				9BC611DC25082477006EAE20 /* System.swift in Sources */,
 			);
@@ -513,7 +529,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BC611F6250830BE006EAE20 /* GameboardsListViewModelTests.swift in Sources */,
-				9B4AEF5C250ED764005C1E41 /* APIClientMock.swift in Sources */,
+				9B4AEF5C250ED764005C1E41 /* NetworkingServiceMock.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

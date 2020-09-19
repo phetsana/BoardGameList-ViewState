@@ -1,5 +1,5 @@
 //
-//  APIClientMock.swift
+//  NetworkingServiceMock.swift
 //  BoardGameAtlasTestTests
 //
 //  Created by Phetsana PHOMMARINH on 14/09/2020.

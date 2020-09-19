@@ -15,8 +15,8 @@ class GameboardsListViewModel: ObservableObject {
         
     private let input = PassthroughSubject<Event, Never>()
     
-    private let apiService: APIClient
-    init(apiService: APIClient = APIClientImpl()) {
+    private let apiService: NetworkingService
+    init(apiService: NetworkingService = BoardGameAtlasNetworkingServiceImpl()) {
         self.apiService = apiService
 
         Publishers.system(initial: state,
@@ -102,7 +102,7 @@ extension GameboardsListViewModel {
         }
     }
     
-    static func whenLoading(apiService: APIClient) -> Feedback<State, Event> {
+    static func whenLoading(apiService: NetworkingService) -> Feedback<State, Event> {
         Feedback { (state: State) -> AnyPublisher<Event, Never> in
             guard case .loading = state else { return Empty().eraseToAnyPublisher() }
             let request = GetGamesRequest()
