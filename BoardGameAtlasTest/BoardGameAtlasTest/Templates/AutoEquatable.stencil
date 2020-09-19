@@ -10,7 +10,11 @@ func == (lhs: {{ type.name }}, rhs: {{ type.name }}) -> Bool {
     {% if case.hasAssociatedValue %}case (.{{ case.name }}(let lhs), .{{ case.name }}(let rhs)):{% else %}case (.{{ case.name }}, .{{ case.name }}):{% endif %}
         {% if not case.hasAssociatedValue %}return true{% else %}
         {% if case.associatedValues.count == 1 %}
+        {% if case.associatedValues[0].type.name == "Error" %}
+        return lhs.isEqual(to: rhs)
+        {% else %}
         return lhs == rhs
+        {% endif %}
         {% else %}
         {% for associated in case.associatedValues %}if lhs.{{ associated.externalName }} != rhs.{{ associated.externalName }} { return false }
         {% endfor %}return true

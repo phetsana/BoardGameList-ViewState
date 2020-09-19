@@ -13,6 +13,7 @@
 		9B6F3FD9250E960C00CADFF4 /* AutoEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F3FD8250E960C00CADFF4 /* AutoEquatable.swift */; };
 		9BB9D5F025160B4200190801 /* NetworkingServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB9D5EF25160B4200190801 /* NetworkingServiceImpl.swift */; };
 		9BB9D5F825160D1400190801 /* BoardGameAtlasNetworkingServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB9D5F725160D1400190801 /* BoardGameAtlasNetworkingServiceImpl.swift */; };
+		9BB9D6012516129500190801 /* Error+Equality.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB9D6002516129500190801 /* Error+Equality.swift */; };
 		9BC22E812506CE8200C0F9D2 /* BoardGameAtlasTestApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC22E802506CE8200C0F9D2 /* BoardGameAtlasTestApp.swift */; };
 		9BC22E832506CE8200C0F9D2 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC22E822506CE8200C0F9D2 /* ContentView.swift */; };
 		9BC22E852506CE8400C0F9D2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 9BC22E842506CE8400C0F9D2 /* Assets.xcassets */; };
@@ -58,6 +59,7 @@
 		9B6F3FD8250E960C00CADFF4 /* AutoEquatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoEquatable.swift; sourceTree = "<group>"; };
 		9BB9D5EF25160B4200190801 /* NetworkingServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingServiceImpl.swift; sourceTree = "<group>"; };
 		9BB9D5F725160D1400190801 /* BoardGameAtlasNetworkingServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardGameAtlasNetworkingServiceImpl.swift; sourceTree = "<group>"; };
+		9BB9D6002516129500190801 /* Error+Equality.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Error+Equality.swift"; sourceTree = "<group>"; };
 		9BC22E7D2506CE8200C0F9D2 /* BoardGameAtlasTest.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = BoardGameAtlasTest.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9BC22E802506CE8200C0F9D2 /* BoardGameAtlasTestApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BoardGameAtlasTestApp.swift; sourceTree = "<group>"; };
 		9BC22E822506CE8200C0F9D2 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -194,6 +196,7 @@
 			isa = PBXGroup;
 			children = (
 				9BC611E625082593006EAE20 /* View+Ext.swift */,
+				9BB9D6002516129500190801 /* Error+Equality.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -518,6 +521,7 @@
 				9BC22E812506CE8200C0F9D2 /* BoardGameAtlasTestApp.swift in Sources */,
 				9BC22EB42506DE9600C0F9D2 /* NetworkingService.swift in Sources */,
 				9B6F3FD9250E960C00CADFF4 /* AutoEquatable.swift in Sources */,
+				9BB9D6012516129500190801 /* Error+Equality.swift in Sources */,
 				9BB9D5F025160B4200190801 /* NetworkingServiceImpl.swift in Sources */,
 				9BC611E425082578006EAE20 /* GameboardsListViewModel.swift in Sources */,
 				9BC611DC25082477006EAE20 /* System.swift in Sources */,

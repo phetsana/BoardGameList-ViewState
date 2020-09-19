@@ -9,6 +9,10 @@ import XCTest
 @testable import BoardGameAtlasTest
 import Combine
 
+enum GameboardsListViewModelTestsError: Error {
+    case error
+}
+
 class GameboardsListViewModelTests: XCTestCase {
 
     var sut: GameboardsListViewModel!
@@ -48,7 +52,7 @@ class GameboardsListViewModelTests: XCTestCase {
 
     func test_reduce_state_idle_event_onFailedToLoadMovies() {
         test_reduce(state: .idle,
-                    event: .onFailedToLoadGames(GameboardsListViewModel.GameError.error),
+                    event: .onFailedToLoadGames(GameboardsListViewModelTestsError.error),
                     expectedState: .idle)
     }
     
@@ -77,8 +81,8 @@ class GameboardsListViewModelTests: XCTestCase {
 
     func test_reduce_state_loading_event_onFailedToLoadMovies() {
         test_reduce(state: .loading,
-                    event: .onFailedToLoadGames(GameboardsListViewModel.GameError.error),
-                    expectedState: .error(GameboardsListViewModel.GameError.error))
+                    event: .onFailedToLoadGames(GameboardsListViewModelTestsError.error),
+                    expectedState: .error(GameboardsListViewModelTestsError.error))
     }
     
     func test_reduce_state_loaded_event_onAppear() {
@@ -98,27 +102,27 @@ class GameboardsListViewModelTests: XCTestCase {
     func test_reduce_state_loaded_event_onFailedToLoadMovies() {
         let games = self.games()
         test_reduce(state: .loaded(games),
-                    event: .onFailedToLoadGames(GameboardsListViewModel.GameError.error),
+                    event: .onFailedToLoadGames(GameboardsListViewModelTestsError.error),
                     expectedState: .loaded(games))
     }
     
     func test_reduce_state_error_event_onAppear() {
-        test_reduce(state: .error(GameboardsListViewModel.GameError.error),
+        test_reduce(state: .error(GameboardsListViewModelTestsError.error),
                     event: .onAppear,
-                    expectedState: .error(GameboardsListViewModel.GameError.error))
+                    expectedState: .error(GameboardsListViewModelTestsError.error))
     }
     
     func test_reduce_state_error_event_onMoviesLoaded() {
         let games = self.games()
-        test_reduce(state: .error(GameboardsListViewModel.GameError.error),
+        test_reduce(state: .error(GameboardsListViewModelTestsError.error),
                     event: .onGamesLoaded(games),
-                    expectedState: .error(GameboardsListViewModel.GameError.error))
+                    expectedState: .error(GameboardsListViewModelTestsError.error))
     }
 
     func test_reduce_state_error_event_onFailedToLoadMovies() {
-        test_reduce(state: .error(GameboardsListViewModel.GameError.error),
-                    event: .onFailedToLoadGames(GameboardsListViewModel.GameError.error),
-                    expectedState: .error(GameboardsListViewModel.GameError.error))
+        test_reduce(state: .error(GameboardsListViewModelTestsError.error),
+                    event: .onFailedToLoadGames(GameboardsListViewModelTestsError.error),
+                    expectedState: .error(GameboardsListViewModelTestsError.error))
     }
     
     func test_whenLoading_gamesLoaded() {

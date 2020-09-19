@@ -45,21 +45,17 @@ class GameboardsListViewModel: ObservableObject {
 
 // MARK: - Inner Types
 extension GameboardsListViewModel {
-    enum State: Equatable {
+    enum State: AutoEquatable {
         case idle
         case loading
         case loaded([GameItem])
-        case error(GameError)
+        case error(Error)
     }
 
-    enum Event: Equatable {
+    enum Event: AutoEquatable {
         case onAppear
         case onGamesLoaded([GameItem])
-        case onFailedToLoadGames(GameError)
-    }
-    
-    enum GameError: Error, Equatable {
-        case error
+        case onFailedToLoadGames(Error)
     }
 
     struct GameItem: Identifiable, Equatable {
@@ -107,11 +103,11 @@ extension GameboardsListViewModel {
             guard case .loading = state else { return Empty().eraseToAnyPublisher() }
             let request = GetGamesRequest()
             return apiService
-                    .send(request)
-                    .map { $0.games.map(GameItem.init) }
-                    .map(Event.onGamesLoaded)
-                .catch { _ in Just(Event.onFailedToLoadGames(GameboardsListViewModel.GameError.error)) }
-                    .eraseToAnyPublisher()
+                .send(request)
+                .map { $0.games.map(GameItem.init) }
+                .map(Event.onGamesLoaded)
+                .catch { Just(Event.onFailedToLoadGames($0)) }                    
+                .eraseToAnyPublisher()
         }
     }
     
