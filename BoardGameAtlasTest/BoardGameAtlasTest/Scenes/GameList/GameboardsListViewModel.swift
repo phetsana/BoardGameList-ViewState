@@ -8,28 +8,34 @@
 import Foundation
 import Combine
 
-final class GameboardsListViewModel: ObservableObject {
+class GameboardsListViewModel: ObservableObject {
     @Published private(set) var state = State.idle
     
-    private var bag = Set<AnyCancellable>()
+    private var subscriptions = Set<AnyCancellable>()
         
     private let input = PassthroughSubject<Event, Never>()
     
-    init() {
+    private let apiService: APIClient
+    init(apiService: APIClient = APIClientImpl()) {
+        self.apiService = apiService
+
         Publishers.system(initial: state,
                           reduce: Self.reduce,
                           scheduler: RunLoop.main,
                           feedbacks: [
-                            Self.whenLoading(),
+                            Self.whenLoading(apiService: self.apiService),
                             Self.userInput(input: input.eraseToAnyPublisher())
                           ]
         )
-        .assign(to: \.state, on: self)
-        .store(in: &bag)
+        .sink(receiveValue: { [weak self] (state) in
+            self?.state = state
+        })
+        .store(in: &subscriptions)
     }
     
     deinit {
-        bag.removeAll()
+        subscriptions.forEach { $0.cancel() }
+        subscriptions.removeAll()
     }
     
     func send(event: Event) {
@@ -39,17 +45,21 @@ final class GameboardsListViewModel: ObservableObject {
 
 // MARK: - Inner Types
 extension GameboardsListViewModel {
-    enum State {
+    enum State: Equatable {
         case idle
         case loading
         case loaded([GameItem])
-        case error(Error)
+        case error(GameError)
     }
 
-    enum Event {
+    enum Event: Equatable {
         case onAppear
-        case onMoviesLoaded([GameItem])
-        case onFailedToLoadMovies(Error)
+        case onGamesLoaded([GameItem])
+        case onFailedToLoadGames(GameError)
+    }
+    
+    enum GameError: Error, Equatable {
+        case error
     }
 
     struct GameItem: Identifiable, Equatable {
@@ -61,23 +71,6 @@ extension GameboardsListViewModel {
             id = game.id
             name = game.name
             imageURL = game.imageUrl
-        }
-    }
-}
-
-extension GameboardsListViewModel.State: Equatable {
-    static func == (lhs: GameboardsListViewModel.State, rhs: GameboardsListViewModel.State) -> Bool {
-        switch (lhs, rhs) {
-        case (.idle, .idle):
-            return true
-        case (.loading, .loading):
-            return true
-        case (.loaded(let lhsGames), .loaded(let rhsGames)):
-                return lhsGames == rhsGames
-        case (.error, .error):
-            return true
-        default:
-            return false
         }
     }
 }
@@ -95,9 +88,9 @@ extension GameboardsListViewModel {
             }
         case .loading:
             switch event {
-            case .onFailedToLoadMovies(let error):
+            case .onFailedToLoadGames(let error):
                 return .error(error)
-            case .onMoviesLoaded(let movies):
+            case .onGamesLoaded(let movies):
                 return .loaded(movies)
             default:
                 return state
@@ -109,16 +102,15 @@ extension GameboardsListViewModel {
         }
     }
     
-    static func whenLoading() -> Feedback<State, Event> {
+    static func whenLoading(apiService: APIClient) -> Feedback<State, Event> {
         Feedback { (state: State) -> AnyPublisher<Event, Never> in
             guard case .loading = state else { return Empty().eraseToAnyPublisher() }
-            let apiService = APIClientImpl()
             let request = GetGamesRequest()
             return apiService
                     .send(request)
                     .map { $0.games.map(GameItem.init) }
-                    .map(Event.onMoviesLoaded)
-                    .catch { Just(Event.onFailedToLoadMovies($0)) }
+                    .map(Event.onGamesLoaded)
+                .catch { _ in Just(Event.onFailedToLoadGames(GameboardsListViewModel.GameError.error)) }
                     .eraseToAnyPublisher()
         }
     }

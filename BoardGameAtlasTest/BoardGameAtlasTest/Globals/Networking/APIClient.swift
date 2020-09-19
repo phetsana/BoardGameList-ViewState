@@ -25,7 +25,7 @@ class APIClientImpl: APIClient {
             let decoder = JSONDecoder()
             decoder.keyDecodingStrategy = .convertFromSnakeCase
             return URLSession.shared
-                .dataTaskPublisher(for: endpoint)
+                .dataTaskPublisher(for: endpoint)                
                 .map { $0.data }
                 .decode(type: T.Response.self, decoder: decoder)
                 .eraseToAnyPublisher()
