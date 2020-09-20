@@ -44,13 +44,13 @@ class GamesListViewModelTests: XCTestCase {
                     expectedState: .loading)
     }
     
-    func test_reduce_state_idle_event_onMoviesLoaded() {
+    func test_reduce_state_idle_event_onGamesLoaded() {
         test_reduce(state: .idle,
                     event: .onGamesLoaded([]),
                     expectedState: .idle)
     }
 
-    func test_reduce_state_idle_event_onFailedToLoadMovies() {
+    func test_reduce_state_idle_event_onFailedToLoadGames() {
         test_reduce(state: .idle,
                     event: .onFailedToLoadGames(GamesListViewModelTestsError.error),
                     expectedState: .idle)
@@ -63,23 +63,24 @@ class GamesListViewModelTests: XCTestCase {
     }
     
     private func games() -> [GamesListViewModel.GameItem] {
-        let gameDTO1 = GameDTO(id: "testid 1", name: "testname 1", imageUrl: nil)
+        let gameDTO1 = GameDTO(id: "testid 1", name: "testname 1", imageUrl: nil, thumbUrl: nil, yearPublished: nil, minPlayers: 1, maxPlayers: 4, description: "Description", primaryPublisher: "Publisher", rank: 1, trendingRank: 2)
+                        
         let game1 = GamesListViewModel.GameItem(game: gameDTO1)
         
-        let gameDTO2 = GameDTO(id: "testid 2", name: "testname 2", imageUrl: nil)
+        let gameDTO2 = GameDTO(id: "testid 2", name: "testname 2", imageUrl: nil, thumbUrl: nil, yearPublished: nil, minPlayers: 1, maxPlayers: 4, description: "Description", primaryPublisher: "Publisher", rank: 1, trendingRank: 2)
         let game2 = GamesListViewModel.GameItem(game: gameDTO2)
         
         return [game1, game2]
     }
     
-    func test_reduce_state_loading_event_onMoviesLoaded() {
+    func test_reduce_state_loading_event_onGamesLoaded() {
         let games = self.games()
         test_reduce(state: .loading,
                     event: .onGamesLoaded(games),
                     expectedState: .loaded(games))
     }
 
-    func test_reduce_state_loading_event_onFailedToLoadMovies() {
+    func test_reduce_state_loading_event_onFailedToLoadGames() {
         test_reduce(state: .loading,
                     event: .onFailedToLoadGames(GamesListViewModelTestsError.error),
                     expectedState: .error(GamesListViewModelTestsError.error))
@@ -92,14 +93,14 @@ class GamesListViewModelTests: XCTestCase {
                     expectedState: .loaded(games))
     }
     
-    func test_reduce_state_loaded_event_onMoviesLoaded() {
+    func test_reduce_state_loaded_event_onGamesLoaded() {
         let games = self.games()
         test_reduce(state: .loaded(games),
                     event: .onGamesLoaded(games),
                     expectedState: .loaded(games))
     }
 
-    func test_reduce_state_loaded_event_onFailedToLoadMovies() {
+    func test_reduce_state_loaded_event_onFailedToLoadGames() {
         let games = self.games()
         test_reduce(state: .loaded(games),
                     event: .onFailedToLoadGames(GamesListViewModelTestsError.error),
@@ -112,14 +113,14 @@ class GamesListViewModelTests: XCTestCase {
                     expectedState: .error(GamesListViewModelTestsError.error))
     }
     
-    func test_reduce_state_error_event_onMoviesLoaded() {
+    func test_reduce_state_error_event_onGamesLoaded() {
         let games = self.games()
         test_reduce(state: .error(GamesListViewModelTestsError.error),
                     event: .onGamesLoaded(games),
                     expectedState: .error(GamesListViewModelTestsError.error))
     }
 
-    func test_reduce_state_error_event_onFailedToLoadMovies() {
+    func test_reduce_state_error_event_onFailedToLoadGames() {
         test_reduce(state: .error(GamesListViewModelTestsError.error),
                     event: .onFailedToLoadGames(GamesListViewModelTestsError.error),
                     expectedState: .error(GamesListViewModelTestsError.error))
@@ -174,7 +175,7 @@ class GamesListViewModelTests: XCTestCase {
     
     func test_deinit() {
         let apiClientMock = NetworkingServiceMock(file: "api_search")
-        var sut: GameboardsListViewModelMock? = GameboardsListViewModelMock(apiService: apiClientMock)
+        var sut: GamesListViewModelMock? = GamesListViewModelMock(apiService: apiClientMock)
         XCTAssertNotNil(sut)
         sut = nil
         XCTAssertNil(sut)
@@ -182,7 +183,7 @@ class GamesListViewModelTests: XCTestCase {
     }
 }
 
-fileprivate class GameboardsListViewModelMock: GamesListViewModel {
+fileprivate class GamesListViewModelMock: GamesListViewModel {
     deinit {
         GamesListViewModelTests.deinitCalled = true
     }
