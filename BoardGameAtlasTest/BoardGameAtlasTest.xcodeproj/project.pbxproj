@@ -405,8 +405,8 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 9BC22EA22506CE8400C0F9D2 /* Build configuration list for PBXNativeTarget "BoardGameAtlasTest" */;
 			buildPhases = (
-				9B6F3FDA250E976600CADFF4 /* Sourcery */,
 				667F9B551F87F25CDFC47F14 /* [CP] Check Pods Manifest.lock */,
+				9B6F3FDA250E976600CADFF4 /* Sourcery */,
 				9BC22E792506CE8200C0F9D2 /* Sources */,
 				9BC22E7A2506CE8200C0F9D2 /* Frameworks */,
 				9BC22E7B2506CE8200C0F9D2 /* Resources */,
