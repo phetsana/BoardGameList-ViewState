@@ -35,7 +35,11 @@ struct GamesListView: View {
     
     private func list(of games: [GamesListViewModel.GameItem]) -> some View {
         return List(games) { game in
-            GameListItemView(game: game)
+            NavigationLink(
+                destination: GameDetailView().environmentObject(GameDetailViewModel(game: game)),
+                label: {
+                    GameListItemView(game: game)
+                })
         }
     }
 }
@@ -58,7 +62,7 @@ struct GameListItemView: View {
     }
     
     private var image: some View {
-        return game.imageURL.map { url in
+        return game.thumbURL.map { url in
             AsyncImage(
                 url: url,
                 cache: cache,
@@ -68,33 +72,49 @@ struct GameListItemView: View {
         }
     }
     
-    private var spinner: some View {
-            Spinner(isAnimating: true, style: .medium)
-        }
+    private var spinner: some View {            
+        Spinner(isAnimating: true, style: .medium)
+    }
 }
 
 struct GamesListView_Previews: PreviewProvider {
 
     static let gamesDTO = [
-        GameDTO(id: "Game 1", name: "The game", imageUrl: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTFGmhr7szv9Ifeg3xBiZEznvNSx7fDZww0UNHav222WcWGpyuVIguKihOQGRJtczSY5rrHCSPDGA&usqp=CAc")),
-        GameDTO(id: "Game 2", name: "Detective Club", imageUrl: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQw71ksfWx6nRCU32a5VAdBuMmURsOCD6U9xQ&usqp=CAU"))
+        GameDTO(id: "game id 1",
+                name: "The game",
+                imageUrl: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTFGmhr7szv9Ifeg3xBiZEznvNSx7fDZww0UNHav222WcWGpyuVIguKihOQGRJtczSY5rrHCSPDGA&usqp=CAc"),
+                thumbUrl: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTFGmhr7szv9Ifeg3xBiZEznvNSx7fDZww0UNHav222WcWGpyuVIguKihOQGRJtczSY5rrHCSPDGA&usqp=CAc"),
+                yearPublished: 2007,
+                minPlayers: 3, maxPlayers: 6,
+                description: "Description ablabla",
+                primaryPublisher: "Publisher",
+                rank: 1, trendingRank: 3),
+        GameDTO(id: "game id 2",
+                name: "Detective Club",
+                imageUrl: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQw71ksfWx6nRCU32a5VAdBuMmURsOCD6U9xQ&usqp=CAU"),
+                thumbUrl: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQw71ksfWx6nRCU32a5VAdBuMmURsOCD6U9xQ&usqp=CAU"),
+                yearPublished: 2007,
+                minPlayers: 3, maxPlayers: 6,
+                description: "Description ablabla",
+                primaryPublisher: "Publisher",
+                rank: 2, trendingRank: 4)
     ]
     static let games = Self.gamesDTO.map(GamesListViewModel.GameItem.init)
     
-    static var viewModelIdle = GamesListViewModel(initialState: .idle)
-    static var viewModelLoading = GamesListViewModel(initialState: .loading)
-    static var viewModelError = GamesListViewModel(initialState: .error(NSError(domain: "Error", code: 11, userInfo: nil)))
-    static var viewModelLoaded = GamesListViewModel(initialState: .loaded(Self.games))
+    static var viewModel = GamesListViewModel()
+    static var viewModelIdle = GamesListViewModel(previewState: .idle)
+    static var viewModelLoading = GamesListViewModel(previewState: .loading)
+    static var viewModelError = GamesListViewModel(previewState: .error(NSError(domain: "Error", code: 11, userInfo: nil)))
+    static var viewModelLoaded = GamesListViewModel(previewState: .loaded(Self.games))
     
     static var previews: some View {
         Group {
             GamesListView()
-                .environmentObject(Self.viewModelIdle)
+                .environmentObject(Self.viewModel)
                 .previewDisplayName("Default")
             GamesListView()
                 .environmentObject(Self.viewModelIdle)
                 .previewDisplayName("Idle state")
-                .onAppear { Self.viewModelIdle.send(event: .idle) }
             GamesListView()
                 .previewDisplayName("Loading state")
                 .environmentObject(Self.viewModelLoading)
