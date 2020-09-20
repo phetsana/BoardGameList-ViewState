@@ -1,31 +1,31 @@
 //
-//  GamesListViewModel.swift
+//  GameDetailViewModel.swift
 //  BoardGameAtlasTest
 //
-//  Created by Phetsana PHOMMARINH on 08/09/2020.
+//  Created by Phetsana PHOMMARINH on 20/09/2020.
 //
 
 import Foundation
 import Combine
 
-class GamesListViewModel: ObservableObject {
+class GameDetailViewModel: ObservableObject {
     @Published private(set) var state: State = .idle
-
+    private(set) var game: GameItem
+    
     private var subscriptions = Set<AnyCancellable>()
-        
+    
     private let input = PassthroughSubject<Event, Never>()
     
-    private let apiService: NetworkingService
     init(previewState: State? = nil,
-         apiService: NetworkingService = BoardGameAtlasNetworkingServiceImpl()) {
-        self.apiService = apiService
-
+         game: GamesListViewModel.GameItem) {
+        self.game = GameItem(game: game)
+        
         Publishers.system(initial: state,
                           previewState: previewState,
                           reduce: Self.reduce,
-                          scheduler: RunLoop.main,                          
+                          scheduler: RunLoop.main,
                           feedbacks: [
-                            Self.whenLoading(apiService: self.apiService),
+                            Self.whenLoading(game: self.game),
                             Self.userInput(input: input.eraseToAnyPublisher())
                           ]
         )
@@ -46,19 +46,17 @@ class GamesListViewModel: ObservableObject {
 }
 
 // MARK: - Inner Types
-extension GamesListViewModel {
+extension GameDetailViewModel {
     enum State {
         case idle
         case loading
-        case loaded([GameItem])
-        case error(Error)
+        case loaded(GameItem)
     }
 
     enum Event {
+        case idle
         case onAppear
-        case onGameSelected(GameItem)
-        case onGamesLoaded([GameItem])
-        case onFailedToLoadGames(Error)
+        case onGameLoaded(GameItem)
     }
 
     struct GameItem: Identifiable, Equatable {
@@ -66,19 +64,19 @@ extension GamesListViewModel {
         let name: String?
         let imageURL: URL?
         
-        init(game: GameDTO) {
+        init(game: GamesListViewModel.GameItem) {
             id = game.id
             name = game.name
-            imageURL = game.imageUrl
+            imageURL = game.imageURL
         }
     }
 }
 
-extension GamesListViewModel.State: AutoEquatable {}
-extension GamesListViewModel.Event: AutoEquatable {}
+extension GameDetailViewModel.State: AutoEquatable {}
+extension GameDetailViewModel.Event: AutoEquatable {}
 
 // MARK: - State Machine
-extension GamesListViewModel {
+extension GameDetailViewModel {
     static func reduce(_ state: State, _ event: Event) -> State {
         switch state {
         case .idle:
@@ -90,30 +88,22 @@ extension GamesListViewModel {
             }
         case .loading:
             switch event {
-            case .onFailedToLoadGames(let error):
-                return .error(error)
-            case .onGamesLoaded(let games):
-                return .loaded(games)
+            case .onGameLoaded(let game):
+                return .loaded(game)
+            case .idle:
+                return .idle
             default:
                 return state
             }
         case .loaded:
             return state
-        case .error:
-            return state
         }
     }
     
-    static func whenLoading(apiService: NetworkingService) -> Feedback<State, Event> {
+    static func whenLoading(game: GameItem) -> Feedback<State, Event> {
         Feedback { (state: State) -> AnyPublisher<Event, Never> in
             guard case .loading = state else { return Empty().eraseToAnyPublisher() }
-            let request = GetGamesRequest()
-            return apiService
-                .send(request)
-                .map { $0.games.map(GameItem.init) }
-                .map(Event.onGamesLoaded)
-                .catch { Just(Event.onFailedToLoadGames($0)) }                    
-                .eraseToAnyPublisher()
+            return Just(Event.onGameLoaded(game)).eraseToAnyPublisher()
         }
     }
     

@@ -35,7 +35,11 @@ struct GamesListView: View {
     
     private func list(of games: [GamesListViewModel.GameItem]) -> some View {
         return List(games) { game in
-            GameListItemView(game: game)
+            NavigationLink(
+                destination: GameDetailView().environmentObject(GameDetailViewModel(game: game)),
+                label: {
+                    GameListItemView(game: game)
+                })
         }
     }
 }
@@ -68,9 +72,9 @@ struct GameListItemView: View {
         }
     }
     
-    private var spinner: some View {
-            Spinner(isAnimating: true, style: .medium)
-        }
+    private var spinner: some View {            
+        Spinner(isAnimating: true, style: .medium)
+    }
 }
 
 struct GamesListView_Previews: PreviewProvider {
@@ -81,10 +85,10 @@ struct GamesListView_Previews: PreviewProvider {
     ]
     static let games = Self.gamesDTO.map(GamesListViewModel.GameItem.init)
     
-    static var viewModelIdle = GamesListViewModel(initialState: .idle)
-    static var viewModelLoading = GamesListViewModel(initialState: .loading)
-    static var viewModelError = GamesListViewModel(initialState: .error(NSError(domain: "Error", code: 11, userInfo: nil)))
-    static var viewModelLoaded = GamesListViewModel(initialState: .loaded(Self.games))
+    static var viewModelIdle = GamesListViewModel(previewState: .idle)
+    static var viewModelLoading = GamesListViewModel(previewState: .loading)
+    static var viewModelError = GamesListViewModel(previewState: .error(NSError(domain: "Error", code: 11, userInfo: nil)))
+    static var viewModelLoaded = GamesListViewModel(previewState: .loaded(Self.games))
     
     static var previews: some View {
         Group {
@@ -94,7 +98,6 @@ struct GamesListView_Previews: PreviewProvider {
             GamesListView()
                 .environmentObject(Self.viewModelIdle)
                 .previewDisplayName("Idle state")
-                .onAppear { Self.viewModelIdle.send(event: .idle) }
             GamesListView()
                 .previewDisplayName("Loading state")
                 .environmentObject(Self.viewModelLoading)
