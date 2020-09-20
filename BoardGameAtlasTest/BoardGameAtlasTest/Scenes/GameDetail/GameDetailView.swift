@@ -45,6 +45,8 @@ struct GameDetailItemView: View {
     var body: some View {
         VStack {
             image
+            players
+            description
         }
     }
 
@@ -62,11 +64,38 @@ struct GameDetailItemView: View {
     private var spinner: some View {            
         Spinner(isAnimating: true, style: .medium)
     }
+    
+    private var players: some View {
+        HStack {
+            Text("Players:")
+                .bold()
+            Text("\(game.minPlayers) - \(game.maxPlayers)")
+        }
+    }
+    
+    private var description: some View {
+        if let description = game.description {
+            return VStack {
+                Text("Description:")
+                    .bold()
+                Text(description)
+            }.eraseToAnyView()
+        }
+        return EmptyView().eraseToAnyView()
+    }
 }
 
 struct GameDetailView_Previews: PreviewProvider {
     static let gameDTO =
-        GameDTO(id: "Game 2", name: "Detective Club", imageUrl: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQw71ksfWx6nRCU32a5VAdBuMmURsOCD6U9xQ&usqp=CAU"))
+        GameDTO(id: "game id",
+                name: "Detective Club",
+                imageUrl: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQw71ksfWx6nRCU32a5VAdBuMmURsOCD6U9xQ&usqp=CAU"),
+                thumbUrl: URL(string: "https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcQw71ksfWx6nRCU32a5VAdBuMmURsOCD6U9xQ&usqp=CAU"),
+                yearPublished: 2007,
+                minPlayers: 3, maxPlayers: 6,
+                description: "Description ablabla",
+                primaryPublisher: "Publisher",
+                rank: 2, trendingRank: 4)       
     static let gameListItem = GamesListViewModel.GameItem(game: gameDTO)
     static let game = GameDetailViewModel.GameItem(game: gameListItem)
     
@@ -82,7 +111,7 @@ struct GameDetailView_Previews: PreviewProvider {
                 .previewDisplayName("Default")
             GameDetailView()
                 .environmentObject(Self.viewModelIdle)
-                .previewDisplayName("Idle state")                
+                .previewDisplayName("Idle state")
             GameDetailView()
                 .previewDisplayName("Loading state")
                 .environmentObject(Self.viewModelLoading)

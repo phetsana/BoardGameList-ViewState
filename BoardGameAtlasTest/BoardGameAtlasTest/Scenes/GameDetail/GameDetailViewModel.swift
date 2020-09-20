@@ -45,36 +45,6 @@ class GameDetailViewModel: ObservableObject {
     }
 }
 
-// MARK: - Inner Types
-extension GameDetailViewModel {
-    enum State {
-        case idle
-        case loading
-        case loaded(GameItem)
-    }
-
-    enum Event {
-        case idle
-        case onAppear
-        case onGameLoaded(GameItem)
-    }
-
-    struct GameItem: Identifiable, Equatable {
-        let id: String
-        let name: String?
-        let imageURL: URL?
-        
-        init(game: GamesListViewModel.GameItem) {
-            id = game.id
-            name = game.name
-            imageURL = game.imageURL
-        }
-    }
-}
-
-extension GameDetailViewModel.State: AutoEquatable {}
-extension GameDetailViewModel.Event: AutoEquatable {}
-
 // MARK: - State Machine
 extension GameDetailViewModel {
     static func reduce(_ state: State, _ event: Event) -> State {

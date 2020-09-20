@@ -36,6 +36,8 @@
 		9BC611F6250830BE006EAE20 /* GamesListViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BC611F5250830BE006EAE20 /* GamesListViewModelTests.swift */; };
 		9BE8FEA32516E35F007043C1 /* GameDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE8FEA22516E35F007043C1 /* GameDetailView.swift */; };
 		9BE8FEA92516E367007043C1 /* GameDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE8FEA82516E367007043C1 /* GameDetailViewModel.swift */; };
+		9BE8FEB125176DA2007043C1 /* GamesListViewModel+InnerTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE8FEB025176DA2007043C1 /* GamesListViewModel+InnerTypes.swift */; };
+		9BE8FEB725176DD0007043C1 /* GameDetailViewModel+InnerTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE8FEB625176DD0007043C1 /* GameDetailViewModel+InnerTypes.swift */; };
 		D2460CFBAB4CDA7D5A1DC106 /* Pods_BoardGameAtlasTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33C6D4589F4F088B6D9A41EB /* Pods_BoardGameAtlasTest.framework */; };
 		F7C97B4E7386477B05E7AF66 /* Pods_BoardGameAtlasTestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE97B1D8597CEEAF79ECAF9 /* Pods_BoardGameAtlasTestTests.framework */; };
 /* End PBXBuildFile section */
@@ -88,6 +90,8 @@
 		9BC611F5250830BE006EAE20 /* GamesListViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GamesListViewModelTests.swift; sourceTree = "<group>"; };
 		9BE8FEA22516E35F007043C1 /* GameDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailView.swift; sourceTree = "<group>"; };
 		9BE8FEA82516E367007043C1 /* GameDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailViewModel.swift; sourceTree = "<group>"; };
+		9BE8FEB025176DA2007043C1 /* GamesListViewModel+InnerTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GamesListViewModel+InnerTypes.swift"; sourceTree = "<group>"; };
+		9BE8FEB625176DD0007043C1 /* GameDetailViewModel+InnerTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameDetailViewModel+InnerTypes.swift"; sourceTree = "<group>"; };
 		AAAE9DC89075244410CC1A48 /* Pods-BoardGameAtlasTestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoardGameAtlasTestTests.debug.xcconfig"; path = "Target Support Files/Pods-BoardGameAtlasTestTests/Pods-BoardGameAtlasTestTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C361A6FC72ACA6E6B9C233B3 /* Pods-BoardGameAtlasTestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoardGameAtlasTestTests.release.xcconfig"; path = "Target Support Files/Pods-BoardGameAtlasTestTests/Pods-BoardGameAtlasTestTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -184,6 +188,7 @@
 				9B8DEDAA2514D35700783371 /* Request */,
 				9BC611E12508252A006EAE20 /* GamesListView.swift */,
 				9BC611E325082578006EAE20 /* GamesListViewModel.swift */,
+				9BE8FEB025176DA2007043C1 /* GamesListViewModel+InnerTypes.swift */,
 			);
 			path = GamesList;
 			sourceTree = "<group>";
@@ -361,6 +366,7 @@
 			children = (
 				9BE8FEA22516E35F007043C1 /* GameDetailView.swift */,
 				9BE8FEA82516E367007043C1 /* GameDetailViewModel.swift */,
+				9BE8FEB625176DD0007043C1 /* GameDetailViewModel+InnerTypes.swift */,
 			);
 			path = GameDetail;
 			sourceTree = "<group>";
@@ -551,7 +557,9 @@
 				9BC611F225082675006EAE20 /* ImageCache.swift in Sources */,
 				9BC22E812506CE8200C0F9D2 /* BoardGameAtlasTestApp.swift in Sources */,
 				9BC22EB42506DE9600C0F9D2 /* NetworkingService.swift in Sources */,
+				9BE8FEB125176DA2007043C1 /* GamesListViewModel+InnerTypes.swift in Sources */,
 				9B6F3FD9250E960C00CADFF4 /* AutoEquatable.swift in Sources */,
+				9BE8FEB725176DD0007043C1 /* GameDetailViewModel+InnerTypes.swift in Sources */,
 				9BB9D6012516129500190801 /* Error+Equality.swift in Sources */,
 				9BB9D5F025160B4200190801 /* NetworkingServiceImpl.swift in Sources */,
 				9BC611E425082578006EAE20 /* GamesListViewModel.swift in Sources */,
