@@ -38,6 +38,7 @@
 		9BE8FEA92516E367007043C1 /* GameDetailViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE8FEA82516E367007043C1 /* GameDetailViewModel.swift */; };
 		9BE8FEB125176DA2007043C1 /* GamesListViewModel+InnerTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE8FEB025176DA2007043C1 /* GamesListViewModel+InnerTypes.swift */; };
 		9BE8FEB725176DD0007043C1 /* GameDetailViewModel+InnerTypes.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE8FEB625176DD0007043C1 /* GameDetailViewModel+InnerTypes.swift */; };
+		9BE8FECC251772B7007043C1 /* GameDetailViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BE8FECB251772B7007043C1 /* GameDetailViewModelTests.swift */; };
 		D2460CFBAB4CDA7D5A1DC106 /* Pods_BoardGameAtlasTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 33C6D4589F4F088B6D9A41EB /* Pods_BoardGameAtlasTest.framework */; };
 		F7C97B4E7386477B05E7AF66 /* Pods_BoardGameAtlasTestTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3FE97B1D8597CEEAF79ECAF9 /* Pods_BoardGameAtlasTestTests.framework */; };
 /* End PBXBuildFile section */
@@ -92,6 +93,7 @@
 		9BE8FEA82516E367007043C1 /* GameDetailViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailViewModel.swift; sourceTree = "<group>"; };
 		9BE8FEB025176DA2007043C1 /* GamesListViewModel+InnerTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GamesListViewModel+InnerTypes.swift"; sourceTree = "<group>"; };
 		9BE8FEB625176DD0007043C1 /* GameDetailViewModel+InnerTypes.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "GameDetailViewModel+InnerTypes.swift"; sourceTree = "<group>"; };
+		9BE8FECB251772B7007043C1 /* GameDetailViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GameDetailViewModelTests.swift; sourceTree = "<group>"; };
 		AAAE9DC89075244410CC1A48 /* Pods-BoardGameAtlasTestTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoardGameAtlasTestTests.debug.xcconfig"; path = "Target Support Files/Pods-BoardGameAtlasTestTests/Pods-BoardGameAtlasTestTests.debug.xcconfig"; sourceTree = "<group>"; };
 		C361A6FC72ACA6E6B9C233B3 /* Pods-BoardGameAtlasTestTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoardGameAtlasTestTests.release.xcconfig"; path = "Target Support Files/Pods-BoardGameAtlasTestTests/Pods-BoardGameAtlasTestTests.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -324,7 +326,7 @@
 		9BC22E912506CE8400C0F9D2 /* BoardGameAtlasTestTests */ = {
 			isa = PBXGroup;
 			children = (
-				9BC611F5250830BE006EAE20 /* GamesListViewModelTests.swift */,
+				9BE8FEC425177293007043C1 /* Scenes */,
 				9BB9D604251633A400190801 /* Globals */,
 				9B8DEDB02514D50800783371 /* Fixtures */,
 				9BC22E942506CE8400C0F9D2 /* Info.plist */,
@@ -367,6 +369,31 @@
 				9BE8FEA22516E35F007043C1 /* GameDetailView.swift */,
 				9BE8FEA82516E367007043C1 /* GameDetailViewModel.swift */,
 				9BE8FEB625176DD0007043C1 /* GameDetailViewModel+InnerTypes.swift */,
+			);
+			path = GameDetail;
+			sourceTree = "<group>";
+		};
+		9BE8FEC425177293007043C1 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				9BE8FEC8251772A9007043C1 /* GameDetail */,
+				9BE8FEC5251772A2007043C1 /* GamesList */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		9BE8FEC5251772A2007043C1 /* GamesList */ = {
+			isa = PBXGroup;
+			children = (
+				9BC611F5250830BE006EAE20 /* GamesListViewModelTests.swift */,
+			);
+			path = GamesList;
+			sourceTree = "<group>";
+		};
+		9BE8FEC8251772A9007043C1 /* GameDetail */ = {
+			isa = PBXGroup;
+			children = (
+				9BE8FECB251772B7007043C1 /* GameDetailViewModelTests.swift */,
 			);
 			path = GameDetail;
 			sourceTree = "<group>";
@@ -572,6 +599,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BC611F6250830BE006EAE20 /* GamesListViewModelTests.swift in Sources */,
+				9BE8FECC251772B7007043C1 /* GameDetailViewModelTests.swift in Sources */,
 				9B4AEF5C250ED764005C1E41 /* NetworkingServiceMock.swift in Sources */,
 				9BB9D607251633C100190801 /* ErrorTests.swift in Sources */,
 			);
