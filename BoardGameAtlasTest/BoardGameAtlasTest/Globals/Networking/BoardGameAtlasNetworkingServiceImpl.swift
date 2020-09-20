@@ -8,8 +8,8 @@
 import Foundation
 
 struct BoardGameAtlasConstants {
-    static var baseURL = URL(string: "https://api.boardgameatlas.com/")!
-    static var clientID = "4ESSA0yrVW"
+    static let baseURL = Environments.serverURL
+    static let clientID = Environments.clientID
 }
 
 final class BoardGameAtlasNetworkingServiceImpl: NetworkingServiceImpl {
