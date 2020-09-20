@@ -19,8 +19,9 @@ platform :ios do
   desc "Test lane"
   lane :tests do
     run_tests(
-      workspace: "BoardGameAtlasTest.xcworkspace",
-      scheme: "BoardGameAtlasTest",
+      workspace: ENV["WORKSPACE"],
+      scheme: ENV["SCHEME"],
+      configuration: ENV["CONFIGURATION"],
       clean: false,
     )
   end
