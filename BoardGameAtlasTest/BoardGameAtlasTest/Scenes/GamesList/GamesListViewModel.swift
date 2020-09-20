@@ -1,5 +1,5 @@
 //
-//  GameboardsListViewModel.swift
+//  GamesListViewModel.swift
 //  BoardGameAtlasTest
 //
 //  Created by Phetsana PHOMMARINH on 08/09/2020.
@@ -8,15 +8,17 @@
 import Foundation
 import Combine
 
-class GameboardsListViewModel: ObservableObject {
-    @Published private(set) var state = State.idle
-    
+class GamesListViewModel: ObservableObject {
+    @Published private(set) var state: State
+
     private var subscriptions = Set<AnyCancellable>()
         
     private let input = PassthroughSubject<Event, Never>()
     
     private let apiService: NetworkingService
-    init(apiService: NetworkingService = BoardGameAtlasNetworkingServiceImpl()) {
+    init(initialState: State = .idle,
+         apiService: NetworkingService = BoardGameAtlasNetworkingServiceImpl()) {
+        self.state = initialState
         self.apiService = apiService
 
         Publishers.system(initial: state,
@@ -44,8 +46,8 @@ class GameboardsListViewModel: ObservableObject {
 }
 
 // MARK: - Inner Types
-extension GameboardsListViewModel {
-    enum State: AutoEquatable {
+extension GamesListViewModel {
+    enum State: AutoEquatable {        
         case idle
         case loading
         case loaded([GameItem])
@@ -53,6 +55,7 @@ extension GameboardsListViewModel {
     }
 
     enum Event: AutoEquatable {
+        case idle
         case onAppear
         case onGamesLoaded([GameItem])
         case onFailedToLoadGames(Error)
@@ -72,7 +75,7 @@ extension GameboardsListViewModel {
 }
 
 // MARK: - State Machine
-extension GameboardsListViewModel {
+extension GamesListViewModel {
     static func reduce(_ state: State, _ event: Event) -> State {
         switch state {
         case .idle:
@@ -88,6 +91,8 @@ extension GameboardsListViewModel {
                 return .error(error)
             case .onGamesLoaded(let movies):
                 return .loaded(movies)
+            case .idle:
+                return .idle
             default:
                 return state
             }

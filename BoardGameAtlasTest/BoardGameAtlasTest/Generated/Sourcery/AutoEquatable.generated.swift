@@ -4,10 +4,12 @@
 // swiftlint:disable file_length
 
 // MARK: - AutoEquatable for Enums
-// MARK: - GameboardsListViewModel.Event AutoEquatable
-extension GameboardsListViewModel.Event: Equatable {}
-func == (lhs: GameboardsListViewModel.Event, rhs: GameboardsListViewModel.Event) -> Bool {
+// MARK: - GamesListViewModel.Event AutoEquatable
+extension GamesListViewModel.Event: Equatable {}
+func == (lhs: GamesListViewModel.Event, rhs: GamesListViewModel.Event) -> Bool {
     switch (lhs, rhs) {
+    case (.idle, .idle):
+        return true
     case (.onAppear, .onAppear):
         return true
     case (.onGamesLoaded(let lhs), .onGamesLoaded(let rhs)):
@@ -17,9 +19,9 @@ func == (lhs: GameboardsListViewModel.Event, rhs: GameboardsListViewModel.Event)
     default: return false
     }
 }
-// MARK: - GameboardsListViewModel.State AutoEquatable
-extension GameboardsListViewModel.State: Equatable {}
-func == (lhs: GameboardsListViewModel.State, rhs: GameboardsListViewModel.State) -> Bool {
+// MARK: - GamesListViewModel.State AutoEquatable
+extension GamesListViewModel.State: Equatable {}
+func == (lhs: GamesListViewModel.State, rhs: GamesListViewModel.State) -> Bool {
     switch (lhs, rhs) {
     case (.idle, .idle):
         return true
