@@ -36,7 +36,7 @@ The second scene is the detail of board game when clicking in a cell of first sc
 
 ## Tests
 
-The chosing architecture permit to test easily the ViewModel part.
+The chosen architecture permit to test easily the ViewModel part.
 
 ### Generated
 
