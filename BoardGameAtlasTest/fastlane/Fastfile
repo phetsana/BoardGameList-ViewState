@@ -21,7 +21,7 @@ platform :ios do
     run_tests(
       workspace: ENV["WORKSPACE"],
       scheme: ENV["SCHEME"],
-      configuration: ENV["CONFIGURATION"],
+      configuration: ENV["CONFIGURATION_TEST"],
       clean: false,
     )
   end
