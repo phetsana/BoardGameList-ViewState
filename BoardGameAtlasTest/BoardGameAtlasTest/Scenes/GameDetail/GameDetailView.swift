@@ -12,12 +12,10 @@ struct GameDetailView: View {
     @EnvironmentObject
     var viewModel: GameDetailViewModel
     
-    var body: some View {        
-        NavigationView {
-            content
-                .navigationBarTitle(self.viewModel.game.name ?? "")
-        }
-        .onAppear { self.viewModel.send(event: .onAppear) }
+    var body: some View {
+        content
+            .navigationTitle(self.viewModel.game.name ?? "")
+            .onAppear { self.viewModel.send(event: .onAppear) }
     }
 
     private var content: some View {
