@@ -34,6 +34,7 @@ struct AsyncImage<Placeholder: View>: View {
                     Image(uiImage: loader.image!)
                         .resizable()
                 )
+                .aspectRatio(contentMode: .fit)
             } else {
                 placeholder
             }

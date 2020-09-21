@@ -15,7 +15,7 @@ struct GamesListView: View {
     var body: some View {
         NavigationView {
             content
-                .navigationBarTitle("Popular game board")
+                .navigationBarTitle("Popular game board", displayMode: .inline)
         }
         .onAppear { self.viewModel.send(event: .onAppear) }
     }
@@ -68,7 +68,7 @@ struct GameListItemView: View {
                 cache: cache,
                 placeholder: spinner,
                 configuration: { $0.resizable().renderingMode(.original) }
-            )            
+            )
         }
     }
     
