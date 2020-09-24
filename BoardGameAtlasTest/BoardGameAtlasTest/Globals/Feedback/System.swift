@@ -8,7 +8,7 @@
 import Combine
 
 extension Publishers {
-    
+
     /// System publisher
     ///
     /// Initialize finite state machine (FSM)
@@ -28,15 +28,14 @@ extension Publishers {
         scheduler: Scheduler,
         feedbacks: [Feedback<State, Event>]
     ) -> AnyPublisher<State, Never> {
-        
+
         if let previewState = previewState {
             return Just(previewState).eraseToAnyPublisher()
         }
-        
+
         let state = CurrentValueSubject<State, Never>(initial)
-        
         let events = feedbacks.map { feedback in feedback.run(state.eraseToAnyPublisher()) }
-        
+
         return Deferred {
             Publishers.MergeMany(events)
                 .receive(on: scheduler)

@@ -9,13 +9,13 @@ import Foundation
 
 enum Environments {
     // MARK: - Keys
-      enum Keys {
+    enum Keys {
         enum Plist {
-          static let serverURL = "SERVER_URL"
-          static let clientID = "CLIENT_ID"
+            static let serverURL = "SERVER_URL"
+            static let clientID = "CLIENT_ID"
         }
-      }
-    
+    }
+
     // MARK: - Plist
     private static let infoDictionary: [String: Any] = {
         guard let dict = Bundle.main.infoDictionary else {

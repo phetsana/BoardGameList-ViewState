@@ -9,15 +9,15 @@ import UIKit
 import Combine
 
 class ImageLoader: ObservableObject {
-    @Published var image: UIImage? = nil
- 
+    @Published var image: UIImage?
+
     var cacheSubscription: AnyCancellable?
-  
+
     init(url: URL) {
         cacheSubscription = ImageCache
             .image(for: url)
             .replaceError(with: nil)
             .receive(on: RunLoop.main, options: .none)
-            .assign(to: \.image, on: self)  
+            .assign(to: \.image, on: self)
     }
 }

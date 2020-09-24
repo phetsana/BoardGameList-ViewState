@@ -10,8 +10,7 @@ import Combine
 @testable import BoardGameAtlasTest
 
 final class NetworkingServiceMock: NetworkingService {
-    
-    
+
     private let file: String
     private let type: String
     private let error: Error?
@@ -20,7 +19,7 @@ final class NetworkingServiceMock: NetworkingService {
         self.type = type
         self.error = error
     }
-    
+
     func data(with file: String, ofType: String = "json") -> Data? {
         let bundle = Bundle(for: Swift.type(of: self))
         if let path = bundle.path(forResource: file, ofType: ofType) {
@@ -31,15 +30,15 @@ final class NetworkingServiceMock: NetworkingService {
                 return nil
             }
         }
-        
+
         return nil
     }
-    
-    func send<T>(_ request: T) -> AnyPublisher<T.Response, NetworkingError> where T : NetworkingRequest {
+
+    func send<T>(_ request: T) -> AnyPublisher<T.Response, NetworkingError> where T: NetworkingRequest {
         let data = self.data(with: file, ofType: type)!
         return Future<T.Response, Error> { [weak self] (promise) in
             if let error = self?.error {
-                return promise(.failure(error))                
+                return promise(.failure(error))
             }
             do {
                 let decoder = JSONDecoder()

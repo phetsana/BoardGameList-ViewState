@@ -14,23 +14,22 @@ enum ErrorTestsError: Error {
 }
 
 class ErrorTests: XCTestCase {
-    
+
     override func setUp() {
-        
     }
-    
+
     func test_error_equality() {
         let error1 = ErrorTestsError.error1
         let error2 = ErrorTestsError.error1
         let nsError1 = ErrorTestsError.error1 as NSError
         let nsError2 = ErrorTestsError.error1 as NSError
-        
+
         XCTAssertEqual(error1.isEqual(to: error2), true)
         XCTAssertEqual(nsError1.isEqual(to: error2), true)
         XCTAssertEqual(error1.isEqual(to: nsError2), true)
         XCTAssertEqual(nsError1.isEqual(to: nsError2), true)
     }
-    
+
     func test_error_no_equality() {
         let error1 = ErrorTestsError.error1
         let error2 = ErrorTestsError.error2

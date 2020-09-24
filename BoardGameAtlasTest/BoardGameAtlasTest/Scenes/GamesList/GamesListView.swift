@@ -7,21 +7,22 @@
 
 import SwiftUI
 import Combine
+import Rswift
 
 struct GamesListView: View {
     @EnvironmentObject
     var viewModel: GamesListViewModel
-    
+
     var body: some View {
         NavigationView {
             content
-                .navigationBarTitle("Popular game board", displayMode: .inline)
+                .navigationBarTitle(R.string.localizable.game_list_title(), displayMode: .inline)
         }
         .onAppear { self.viewModel.send(event: .onAppear) }
     }
-    
+
     private var content: some View {
-        switch viewModel.state {        
+        switch viewModel.state {
         case .idle:
             return Color.clear.eraseToAnyView()
         case .loading:
@@ -32,7 +33,7 @@ struct GamesListView: View {
             return list(of: games).eraseToAnyView()
         }
     }
-    
+
     private func list(of games: [GamesListViewModel.GameItem]) -> some View {
         return List(games) { game in
             NavigationLink(
@@ -53,13 +54,13 @@ struct GameListItemView: View {
             name
         }
     }
-    
+
     private var name: some View {
         Text(game.name ?? "")
             .font(.title)
             .frame(idealWidth: .infinity, maxWidth: .infinity, alignment: .center)
     }
-    
+
     private var image: some View {
         return game.thumbURL.map { url in
             RemoteImage(url: url)
@@ -90,13 +91,15 @@ struct GamesListView_Previews: PreviewProvider {
                 rank: 2, trendingRank: 4)
     ]
     static let games = Self.gamesDTO.map(GamesListViewModel.GameItem.init)
-    
+
     static var viewModel = GamesListViewModel()
     static var viewModelIdle = GamesListViewModel(previewState: .idle)
     static var viewModelLoading = GamesListViewModel(previewState: .loading)
-    static var viewModelError = GamesListViewModel(previewState: .error(NSError(domain: "Error", code: 11, userInfo: nil)))
+    static var viewModelError = GamesListViewModel(previewState: .error(NSError(domain: "Error",
+                                                                                code: 11,
+                                                                                userInfo: nil)))
     static var viewModelLoaded = GamesListViewModel(previewState: .loaded(Self.games))
-    
+
     static var previews: some View {
         Group {
             GamesListView()

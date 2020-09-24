@@ -19,7 +19,7 @@ struct RemoteImage: View {
             if imageLoader.image != nil {
                 imageLoader
                     .image
-                    .map { Image(uiImage:$0).resizable() }
+                    .map { Image(uiImage: $0).resizable() }
                     .aspectRatio(contentMode: .fit)
             } else {
                 Spinner(isAnimating: true, style: .medium)

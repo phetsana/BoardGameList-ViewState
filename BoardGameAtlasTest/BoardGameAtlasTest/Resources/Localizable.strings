@@ -1,0 +1,12 @@
+/* 
+  Localizable.strings
+  BoardGameAtlasTest
+
+  Created by Phetsana PHOMMARINH on 24/09/2020.
+  
+*/
+
+"game_list_title" = "Popular game board";
+
+"game_detail_players" = "Players";
+"game_detail_description" = "Description";

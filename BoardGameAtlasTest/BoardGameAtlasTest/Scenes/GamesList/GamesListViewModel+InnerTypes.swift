@@ -31,7 +31,7 @@ extension GamesListViewModel {
         let description: String?
         let minPlayers: Int
         let maxPlayers: Int
-        
+
         init(game: GameDTO) {
             id = game.id
             name = game.name
