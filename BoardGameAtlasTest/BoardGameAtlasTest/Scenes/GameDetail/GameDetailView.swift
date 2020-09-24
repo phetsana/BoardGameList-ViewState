@@ -38,7 +38,6 @@ struct GameDetailView: View {
 
 struct GameDetailItemView: View {
     let game: GameDetailViewModel.GameItem
-    @Environment(\.imageCache) var cache: ImageCache
     
     var body: some View {
         VStack {
@@ -50,12 +49,7 @@ struct GameDetailItemView: View {
 
     private var image: some View {
         return game.imageURL.map { url in
-            AsyncImage(
-                url: url,
-                cache: cache,
-                placeholder: spinner,
-                configuration: { $0.resizable().renderingMode(.original) }
-            )
+            RemoteImage(url: url)
         }
     }
     
