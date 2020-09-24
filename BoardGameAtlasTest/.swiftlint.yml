@@ -2,7 +2,9 @@ disabled_rules:
   - trailing_whitespace
 
 excluded:
-  - BoardGameAtlasTest/Generated
+  - BoardGameAtlasTest/Generated/Sourcery/
+  - BoardGameAtlasTest/Generated/Rswift/
+  - Pods
 
 line_length:
   ignores_urls: true

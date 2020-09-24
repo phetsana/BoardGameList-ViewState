@@ -6,6 +6,7 @@ target 'BoardGameAtlasTest' do
   use_frameworks!
 
   # Pods for BoardGameAtlasTest
+  pod 'R.swift'
   pod 'Sourcery'
   pod 'SwiftLint'
 

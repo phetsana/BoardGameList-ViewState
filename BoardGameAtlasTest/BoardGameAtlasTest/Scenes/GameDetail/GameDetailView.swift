@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import Rswift
 
 struct GameDetailView: View {
     @EnvironmentObject
@@ -53,13 +54,9 @@ struct GameDetailItemView: View {
         }
     }
 
-    private var spinner: some View {
-        Spinner(isAnimating: true, style: .medium)
-    }
-
     private var players: some View {
         HStack {
-            Text("Players:")
+            Text(R.string.localizable.game_detail_players() + ":")
                 .bold()
             Text("\(game.minPlayers) - \(game.maxPlayers)")
         }
@@ -68,7 +65,7 @@ struct GameDetailItemView: View {
     private var description: some View {
         if let description = game.description {
             return VStack {
-                Text("Description:")
+                Text(R.string.localizable.game_detail_description() + ":")
                     .bold()
                 Text(description)
             }.eraseToAnyView()

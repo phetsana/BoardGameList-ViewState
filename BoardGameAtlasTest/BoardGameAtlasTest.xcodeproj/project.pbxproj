@@ -3,7 +3,7 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
@@ -13,6 +13,8 @@
 		9B4D6809251D231800D1E225 /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4D6808251D231800D1E225 /* RemoteImage.swift */; };
 		9B4D6810251D236200D1E225 /* ImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4D680F251D236200D1E225 /* ImageLoader.swift */; };
 		9B4D6816251D23B700D1E225 /* ImageCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4D6815251D23B700D1E225 /* ImageCache.swift */; };
+		9B4D684A251D356500D1E225 /* R.generated.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B4D6849251D356500D1E225 /* R.generated.swift */; };
+		9B4D685C251D35A400D1E225 /* Localizable.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9B4D685B251D35A400D1E225 /* Localizable.strings */; };
 		9B6F3FD9250E960C00CADFF4 /* AutoEquatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9B6F3FD8250E960C00CADFF4 /* AutoEquatable.swift */; };
 		9BB9D5F025160B4200190801 /* NetworkingServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB9D5EF25160B4200190801 /* NetworkingServiceImpl.swift */; };
 		9BB9D5F825160D1400190801 /* BoardGameAtlasNetworkingServiceImpl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9BB9D5F725160D1400190801 /* BoardGameAtlasNetworkingServiceImpl.swift */; };
@@ -72,6 +74,8 @@
 		9B4D6808251D231800D1E225 /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		9B4D680F251D236200D1E225 /* ImageLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageLoader.swift; sourceTree = "<group>"; };
 		9B4D6815251D23B700D1E225 /* ImageCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageCache.swift; sourceTree = "<group>"; };
+		9B4D6849251D356500D1E225 /* R.generated.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = R.generated.swift; sourceTree = "<group>"; };
+		9B4D685B251D35A400D1E225 /* Localizable.strings */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; path = Localizable.strings; sourceTree = "<group>"; };
 		9B6F3FD8250E960C00CADFF4 /* AutoEquatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AutoEquatable.swift; sourceTree = "<group>"; };
 		9B7548E86381C5E6F41DA6FE /* Pods-BoardGameAtlasTest.release (development).xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-BoardGameAtlasTest.release (development).xcconfig"; path = "Target Support Files/Pods-BoardGameAtlasTest/Pods-BoardGameAtlasTest.release (development).xcconfig"; sourceTree = "<group>"; };
 		9BB9D5EF25160B4200190801 /* NetworkingServiceImpl.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkingServiceImpl.swift; sourceTree = "<group>"; };
@@ -180,6 +184,14 @@
 			path = RemoteImage;
 			sourceTree = "<group>";
 		};
+		9B4D6848251D356500D1E225 /* Rswift */ = {
+			isa = PBXGroup;
+			children = (
+				9B4D6849251D356500D1E225 /* R.generated.swift */,
+			);
+			path = Rswift;
+			sourceTree = "<group>";
+		};
 		9B8DED9F2514D22E00783371 /* AppStart */ = {
 			isa = PBXGroup;
 			children = (
@@ -204,6 +216,7 @@
 		9B8DEDA12514D25400783371 /* Generated */ = {
 			isa = PBXGroup;
 			children = (
+				9B4D6848251D356500D1E225 /* Rswift */,
 				9B8DEDA52514D31100783371 /* Sourcery */,
 			);
 			path = Generated;
@@ -213,6 +226,7 @@
 			isa = PBXGroup;
 			children = (
 				9BC22E842506CE8400C0F9D2 /* Assets.xcassets */,
+				9B4D685B251D35A400D1E225 /* Localizable.strings */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -475,10 +489,12 @@
 			buildPhases = (
 				667F9B551F87F25CDFC47F14 /* [CP] Check Pods Manifest.lock */,
 				9B6F3FDA250E976600CADFF4 /* Sourcery */,
+				9B4D6841251D341700D1E225 /* Rswift */,
 				9B4D6824251D2D0F00D1E225 /* SwiftLint */,
 				9BC22E792506CE8200C0F9D2 /* Sources */,
 				9BC22E7A2506CE8200C0F9D2 /* Frameworks */,
 				9BC22E7B2506CE8200C0F9D2 /* Resources */,
+				6C4BB5CCA89857790016AB86 /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -551,6 +567,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				9BE8FEF12517A728007043C1 /* Staging.xcconfig in Resources */,
+				9B4D685C251D35A400D1E225 /* Localizable.strings in Resources */,
 				9BC22E882506CE8400C0F9D2 /* Preview Assets.xcassets in Resources */,
 				9BC22E852506CE8400C0F9D2 /* Assets.xcassets in Resources */,
 				9BE8FEEB2517A717007043C1 /* Production.xcconfig in Resources */,
@@ -613,6 +630,23 @@
 			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
 			showEnvVarsInLog = 0;
 		};
+		6C4BB5CCA89857790016AB86 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BoardGameAtlasTest/Pods-BoardGameAtlasTest-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-BoardGameAtlasTest/Pods-BoardGameAtlasTest-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-BoardGameAtlasTest/Pods-BoardGameAtlasTest-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		9B4D6824251D2D0F00D1E225 /* SwiftLint */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -630,6 +664,26 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\nif which swiftlint >/dev/null; then\n  \"${PODS_ROOT}/SwiftLint/swiftlint\"\nelse\n  echo \"warning: SwiftLint not installed, download from https://github.com/realm/SwiftLint\"\nfi\n";
+		};
+		9B4D6841251D341700D1E225 /* Rswift */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$TEMP_DIR/rswift-lastrun",
+			);
+			name = Rswift;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				$SRCROOT/BoardGameAtlasTest/Generated/Rswift/R.generated.swift,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"$PODS_ROOT/R.swift/rswift\" generate \"$SRCROOT/BoardGameAtlasTest/Generated/Rswift/R.generated.swift\"\n";
 		};
 		9B6F3FDA250E976600CADFF4 /* Sourcery */ = {
 			isa = PBXShellScriptBuildPhase;
@@ -676,6 +730,7 @@
 				9BE8FEB125176DA2007043C1 /* GamesListViewModel+InnerTypes.swift in Sources */,
 				9B6F3FD9250E960C00CADFF4 /* AutoEquatable.swift in Sources */,
 				9BE8FEB725176DD0007043C1 /* GameDetailViewModel+InnerTypes.swift in Sources */,
+				9B4D684A251D356500D1E225 /* R.generated.swift in Sources */,
 				9BE8FF002517A8D6007043C1 /* Environments.swift in Sources */,
 				9B4D6809251D231800D1E225 /* RemoteImage.swift in Sources */,
 				9BB9D6012516129500190801 /* Error+Equality.swift in Sources */,

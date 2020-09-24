@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Combine
+import Rswift
 
 struct GamesListView: View {
     @EnvironmentObject
@@ -15,7 +16,7 @@ struct GamesListView: View {
     var body: some View {
         NavigationView {
             content
-                .navigationBarTitle("Popular game board", displayMode: .inline)
+                .navigationBarTitle(R.string.localizable.game_list_title(), displayMode: .inline)
         }
         .onAppear { self.viewModel.send(event: .onAppear) }
     }
