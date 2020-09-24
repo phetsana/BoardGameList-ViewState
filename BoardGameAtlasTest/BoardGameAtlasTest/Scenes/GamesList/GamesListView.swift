@@ -46,8 +46,7 @@ struct GamesListView: View {
 
 struct GameListItemView: View {
     let game: GamesListViewModel.GameItem
-    @Environment(\.imageCache) var cache: ImageCache
-    
+
     var body: some View {
         HStack {
             image.frame(width: 100, height: 100, alignment: .center)
@@ -63,17 +62,8 @@ struct GameListItemView: View {
     
     private var image: some View {
         return game.thumbURL.map { url in
-            AsyncImage(
-                url: url,
-                cache: cache,
-                placeholder: spinner,
-                configuration: { $0.resizable().renderingMode(.original) }
-            )
+            RemoteImage(url: url)
         }
-    }
-    
-    private var spinner: some View {            
-        Spinner(isAnimating: true, style: .medium)
     }
 }
 
