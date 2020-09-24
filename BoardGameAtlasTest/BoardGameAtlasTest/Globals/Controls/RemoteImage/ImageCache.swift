@@ -9,19 +9,19 @@ import UIKit
 import Combine
 
 class ImageCache {
-  
+
     enum Error: Swift.Error {
         case dataConversionFailed
         case sessionError(Swift.Error)
     }
-  
+
     static let shared = ImageCache()
     private let cache = NSCache<NSURL, UIImage>()
-    
+
     private init() { }
-  
+
     static func image(for url: URL) -> AnyPublisher<UIImage?, ImageCache.Error> {
-    
+
         guard let image = shared.cache.object(forKey: url as NSURL) else {
             return URLSession
                 .shared
@@ -39,7 +39,7 @@ class ImageCache {
         }
 
         return Just(image)
-            .setFailureType(to: ImageCache.Error.self)            
+            .setFailureType(to: ImageCache.Error.self)
             .eraseToAnyPublisher()
     }
 }

@@ -14,7 +14,7 @@ class NetworkingServiceImpl: NetworkingService {
     init(baseURL: URL) {
         self.baseURL = baseURL
     }
-    
+
     func send<T: NetworkingRequest>(_ request: T) -> AnyPublisher<T.Response, NetworkingError> {
         do {
             let endpoint = try self.endpoint(for: request)
@@ -29,10 +29,9 @@ class NetworkingServiceImpl: NetworkingService {
         } catch {
             return Fail(error: NetworkingError.endpoint).eraseToAnyPublisher()
         }
-        
     }
 
-    func endpoint<T: NetworkingRequest>(for request: T) throws -> URL  {
+    func endpoint<T: NetworkingRequest>(for request: T) throws -> URL {
         guard var urlComponents = URLComponents(url: baseURL, resolvingAgainstBaseURL: true) else {
             throw NetworkingError.endpoint
         }
@@ -40,19 +39,19 @@ class NetworkingServiceImpl: NetworkingService {
 
         // Custom query items needed for this specific request
         let customQueryItems: [URLQueryItem]
-        
+
         do {
             customQueryItems = try URLQueryItemEncoder.encode(request)
         } catch {
             throw NetworkingError.endpoint
         }
-        
+
         urlComponents.queryItems = customQueryItems
-        
+
         guard let url = urlComponents.url else {
             throw NetworkingError.endpoint
         }
-    
+
         // Construct the final URL with all the previous data
         return url
     }
@@ -74,10 +73,10 @@ enum HTTPParameter: CustomStringConvertible, Decodable {
     case bool(Bool)
     case int(Int)
     case double(Double)
-    
+
     init(from decoder: Decoder) throws {
         let container = try decoder.singleValueContainer()
-        
+
         if let string = try? container.decode(String.self) {
             self = .string(string)
         } else if let bool = try? container.decode(Bool.self) {
@@ -90,7 +89,7 @@ enum HTTPParameter: CustomStringConvertible, Decodable {
             throw NetworkingError.decoding
         }
     }
-    
+
     var description: String {
         switch self {
         case .string(let string):

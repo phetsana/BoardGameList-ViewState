@@ -11,7 +11,7 @@ import Combine
 struct GameDetailView: View {
     @EnvironmentObject
     var viewModel: GameDetailViewModel
-    
+
     var body: some View {
         content
             .navigationTitle(self.viewModel.game.name ?? "")
@@ -28,7 +28,7 @@ struct GameDetailView: View {
             return list(of: [game]).eraseToAnyView()
         }
     }
-    
+
     private func list(of games: [GameDetailViewModel.GameItem]) -> some View {
         return List(games) { game in
             GameDetailItemView(game: game)
@@ -38,7 +38,7 @@ struct GameDetailView: View {
 
 struct GameDetailItemView: View {
     let game: GameDetailViewModel.GameItem
-    
+
     var body: some View {
         VStack {
             image
@@ -52,11 +52,11 @@ struct GameDetailItemView: View {
             RemoteImage(url: url)
         }
     }
-    
-    private var spinner: some View {            
+
+    private var spinner: some View {
         Spinner(isAnimating: true, style: .medium)
     }
-    
+
     private var players: some View {
         HStack {
             Text("Players:")
@@ -64,7 +64,7 @@ struct GameDetailItemView: View {
             Text("\(game.minPlayers) - \(game.maxPlayers)")
         }
     }
-    
+
     private var description: some View {
         if let description = game.description {
             return VStack {
@@ -87,15 +87,15 @@ struct GameDetailView_Previews: PreviewProvider {
                 minPlayers: 3, maxPlayers: 6,
                 description: "Description ablabla",
                 primaryPublisher: "Publisher",
-                rank: 2, trendingRank: 4)       
+                rank: 2, trendingRank: 4)
     static let gameListItem = GamesListViewModel.GameItem(game: gameDTO)
     static let game = GameDetailViewModel.GameItem(game: gameListItem)
-    
+
     static var viewModel = GameDetailViewModel(game: gameListItem)
     static var viewModelIdle = GameDetailViewModel(previewState: .idle, game: gameListItem)
     static var viewModelLoading = GameDetailViewModel(previewState: .loading, game: gameListItem)
     static var viewModelLoaded = GameDetailViewModel(previewState: .loaded(game), game: gameListItem)
-    
+
     static var previews: some View {
         Group {
             GameDetailView()

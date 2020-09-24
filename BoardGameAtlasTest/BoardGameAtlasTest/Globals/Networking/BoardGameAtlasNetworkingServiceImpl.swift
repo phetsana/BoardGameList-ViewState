@@ -16,7 +16,7 @@ final class BoardGameAtlasNetworkingServiceImpl: NetworkingServiceImpl {
     init() {
         super.init(baseURL: BoardGameAtlasConstants.baseURL)
     }
-    
+
     override func endpoint<T: NetworkingRequest>(for request: T) throws -> URL {
         return try super.endpoint(for: request).addClientID()
     }

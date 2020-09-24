@@ -11,15 +11,15 @@ import Combine
 class GameDetailViewModel: ObservableObject {
     @Published private(set) var state: State = .idle
     private(set) var game: GameItem
-    
+
     private var subscriptions = Set<AnyCancellable>()
-    
+
     private let input = PassthroughSubject<Event, Never>()
-    
+
     init(previewState: State? = nil,
          game: GamesListViewModel.GameItem) {
         self.game = GameItem(game: game)
-        
+
         Publishers.system(initial: state,
                           previewState: previewState,
                           reduce: Self.reduce,
@@ -34,12 +34,12 @@ class GameDetailViewModel: ObservableObject {
         })
         .store(in: &subscriptions)
     }
-    
+
     deinit {
         subscriptions.forEach { $0.cancel() }
         subscriptions.removeAll()
     }
-    
+
     func send(event: Event) {
         input.send(event)
     }
@@ -69,14 +69,14 @@ extension GameDetailViewModel {
             return state
         }
     }
-    
+
     static func whenLoading(game: GameItem) -> Feedback<State, Event> {
         Feedback { (state: State) -> AnyPublisher<Event, Never> in
             guard case .loading = state else { return Empty().eraseToAnyPublisher() }
             return Just(Event.onGameLoaded(game)).eraseToAnyPublisher()
         }
     }
-    
+
     static func userInput(input: AnyPublisher<Event, Never>) -> Feedback<State, Event> {
         Feedback { _ in input }
     }

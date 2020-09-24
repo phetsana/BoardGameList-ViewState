@@ -12,9 +12,9 @@ class GamesListViewModel: ObservableObject {
     @Published private(set) var state: State = .idle
 
     private var subscriptions = Set<AnyCancellable>()
-        
+
     private let input = PassthroughSubject<Event, Never>()
-    
+
     private let apiService: NetworkingService
     init(previewState: State? = nil,
          apiService: NetworkingService = BoardGameAtlasNetworkingServiceImpl()) {
@@ -23,7 +23,7 @@ class GamesListViewModel: ObservableObject {
         Publishers.system(initial: state,
                           previewState: previewState,
                           reduce: Self.reduce,
-                          scheduler: RunLoop.main,                          
+                          scheduler: RunLoop.main,
                           feedbacks: [
                             Self.whenLoading(apiService: self.apiService),
                             Self.userInput(input: input.eraseToAnyPublisher())
@@ -34,12 +34,12 @@ class GamesListViewModel: ObservableObject {
         })
         .store(in: &subscriptions)
     }
-    
+
     deinit {
         subscriptions.forEach { $0.cancel() }
         subscriptions.removeAll()
     }
-    
+
     func send(event: Event) {
         input.send(event)
     }
@@ -71,7 +71,7 @@ extension GamesListViewModel {
             return state
         }
     }
-    
+
     static func whenLoading(apiService: NetworkingService) -> Feedback<State, Event> {
         Feedback { (state: State) -> AnyPublisher<Event, Never> in
             guard case .loading = state else { return Empty().eraseToAnyPublisher() }
@@ -80,11 +80,11 @@ extension GamesListViewModel {
                 .send(request)
                 .map { $0.games.map(GameItem.init) }
                 .map(Event.onGamesLoaded)
-                .catch { Just(Event.onFailedToLoadGames($0)) }                    
+                .catch { Just(Event.onFailedToLoadGames($0)) }
                 .eraseToAnyPublisher()
         }
     }
-    
+
     static func userInput(input: AnyPublisher<Event, Never>) -> Feedback<State, Event> {
         Feedback { _ in input }
     }

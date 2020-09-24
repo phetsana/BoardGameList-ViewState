@@ -9,8 +9,12 @@ import XCTest
 @testable import BoardGameAtlasTest
 import Combine
 
-enum GamesListViewModelTestsError: Error {
+private enum GamesListViewModelTestsError: Error {
     case error
+}
+
+private enum APIError: Error {
+    case loading
 }
 
 class GamesListViewModelTests: XCTestCase {
@@ -18,7 +22,7 @@ class GamesListViewModelTests: XCTestCase {
     var sut: GamesListViewModel!
     
     var cancellables = Set<AnyCancellable>()
-    
+
     static var deinitCalled = false
     
     override func setUp() {
@@ -26,7 +30,7 @@ class GamesListViewModelTests: XCTestCase {
         sut = GamesListViewModel(apiService: apiClientMock)
         GamesListViewModelTests.deinitCalled = false
     }
-    
+
     override func tearDown() {
         cancellables.removeAll()
     }
@@ -37,7 +41,7 @@ class GamesListViewModelTests: XCTestCase {
         let newState = GamesListViewModel.reduce(state, event)
         XCTAssertEqual(newState, expectedState)
     }
-    
+
     func test_reduce_state_idle_event_onAppear() {
         test_reduce(state: .idle,
                     event: .onAppear,
@@ -61,15 +65,19 @@ class GamesListViewModelTests: XCTestCase {
                     event: .onAppear,
                     expectedState: .loading)
     }
-    
+
     private func games() -> [GamesListViewModel.GameItem] {
-        let gameDTO1 = GameDTO(id: "testid 1", name: "testname 1", imageUrl: nil, thumbUrl: nil, yearPublished: nil, minPlayers: 1, maxPlayers: 4, description: "Description", primaryPublisher: "Publisher", rank: 1, trendingRank: 2)
-                        
+        let gameDTO1 = GameDTO(id: "testid 1", name: "testname 1", imageUrl: nil, thumbUrl: nil,
+                               yearPublished: nil, minPlayers: 1, maxPlayers: 4, description: "Description",
+                               primaryPublisher: "Publisher", rank: 1, trendingRank: 2)
+
         let game1 = GamesListViewModel.GameItem(game: gameDTO1)
-        
-        let gameDTO2 = GameDTO(id: "testid 2", name: "testname 2", imageUrl: nil, thumbUrl: nil, yearPublished: nil, minPlayers: 1, maxPlayers: 4, description: "Description", primaryPublisher: "Publisher", rank: 1, trendingRank: 2)
+
+        let gameDTO2 = GameDTO(id: "testid 2", name: "testname 2", imageUrl: nil, thumbUrl: nil,
+                               yearPublished: nil, minPlayers: 1, maxPlayers: 4, description: "Description",
+                               primaryPublisher: "Publisher", rank: 1, trendingRank: 2)
         let game2 = GamesListViewModel.GameItem(game: gameDTO2)
-        
+
         return [game1, game2]
     }
     
@@ -85,14 +93,14 @@ class GamesListViewModelTests: XCTestCase {
                     event: .onFailedToLoadGames(GamesListViewModelTestsError.error),
                     expectedState: .error(GamesListViewModelTestsError.error))
     }
-    
+
     func test_reduce_state_loaded_event_onAppear() {
         let games = self.games()
         test_reduce(state: .loaded(games),
                     event: .onAppear,
                     expectedState: .loaded(games))
     }
-    
+
     func test_reduce_state_loaded_event_onGamesLoaded() {
         let games = self.games()
         test_reduce(state: .loaded(games),
@@ -106,13 +114,13 @@ class GamesListViewModelTests: XCTestCase {
                     event: .onFailedToLoadGames(GamesListViewModelTestsError.error),
                     expectedState: .loaded(games))
     }
-    
+
     func test_reduce_state_error_event_onAppear() {
         test_reduce(state: .error(GamesListViewModelTestsError.error),
                     event: .onAppear,
                     expectedState: .error(GamesListViewModelTestsError.error))
     }
-    
+
     func test_reduce_state_error_event_onGamesLoaded() {
         let games = self.games()
         test_reduce(state: .error(GamesListViewModelTestsError.error),
@@ -125,7 +133,7 @@ class GamesListViewModelTests: XCTestCase {
                     event: .onFailedToLoadGames(GamesListViewModelTestsError.error),
                     expectedState: .error(GamesListViewModelTestsError.error))
     }
-    
+
     func test_whenLoading_gamesLoaded() {
         let apiClientMock = NetworkingServiceMock(file: "api_search")
         let feedback = GamesListViewModel.whenLoading(apiService: apiClientMock)
@@ -139,19 +147,16 @@ class GamesListViewModelTests: XCTestCase {
                     XCTAssertEqual(games.isEmpty, false)
                     loadingExpectation.fulfill()
                 } else {
-                    XCTFail()
+                    XCTFail("Gamed should be loaded")
                 }
             }
             .store(in: &cancellables)
         publisher.value = .loading
-        
+
         wait(for: [loadingExpectation], timeout: 1)
     }
-    
+
     func test_whenLoading_error() {
-        enum APIError: Error {
-            case loading
-        }
         let apiClientMock = NetworkingServiceMock(file: "api_search", error: APIError.loading)
         let feedback = GamesListViewModel.whenLoading(apiService: apiClientMock)
         let publisher = CurrentValueSubject<GamesListViewModel.State, Never>(.idle)
@@ -164,15 +169,15 @@ class GamesListViewModelTests: XCTestCase {
                     XCTAssertNotNil(error)
                     loadingExpectation.fulfill()
                 } else {
-                    XCTFail()
+                    XCTFail("Error should be triggered")
                 }
             }
             .store(in: &cancellables)
         publisher.value = .loading
-        
+
         wait(for: [loadingExpectation], timeout: 1)
     }
-    
+
     func test_deinit() {
         let apiClientMock = NetworkingServiceMock(file: "api_search")
         var sut: GamesListViewModelMock? = GamesListViewModelMock(apiService: apiClientMock)
@@ -183,7 +188,7 @@ class GamesListViewModelTests: XCTestCase {
     }
 }
 
-fileprivate class GamesListViewModelMock: GamesListViewModel {
+private class GamesListViewModelMock: GamesListViewModel {
     deinit {
         GamesListViewModelTests.deinitCalled = true
     }

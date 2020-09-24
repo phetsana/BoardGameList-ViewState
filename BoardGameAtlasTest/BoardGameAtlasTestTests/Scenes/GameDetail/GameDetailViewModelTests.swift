@@ -107,7 +107,7 @@ class GameDetailViewModelTests: XCTestCase {
                     XCTAssertEqual(game, resultGame)
                     loadingExpectation.fulfill()
                 } else {
-                    XCTFail()
+                    XCTFail("game should be loaded")
                 }
             }
             .store(in: &cancellables)
@@ -126,7 +126,7 @@ class GameDetailViewModelTests: XCTestCase {
     }
 }
 
-fileprivate class GameDetailViewModelMock: GameDetailViewModel {
+private class GameDetailViewModelMock: GameDetailViewModel {
     deinit {
         GameDetailViewModelTests.deinitCalled = true
     }

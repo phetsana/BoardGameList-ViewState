@@ -14,11 +14,11 @@ enum OrderBy: String, Codable {
 struct GetGamesRequest: NetworkingRequest {
 
     typealias Response = GamesDTO
-         
+
     var resourceName: String {
         return "/api/search"
     }
-    
+
     private let orderBy: OrderBy
     private let ascending: Bool
     private let limit: Int
@@ -29,8 +29,8 @@ struct GetGamesRequest: NetworkingRequest {
         self.ascending = ascending
         self.limit = limit
     }
-    
-    var parameters: [String : Any] {
+
+    var parameters: [String: Any] {
         return [
             "order_by": orderBy.rawValue,
             "ascending": ascending,
